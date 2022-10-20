@@ -19,4 +19,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
+  <ItemGroup>
+    <Text Include="keywords.txt" />
+    <Text Include="SampleText1.txt" />
+    <Text Include="SampleText2.txt" />
+  </ItemGroup>
 </Project>
