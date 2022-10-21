@@ -28,7 +28,7 @@ int main() {
 	readKeywords();
 
 	// ----- EXUCUTING ALGORITHM -----
-	algorithm("SampleText1.txt");
+	algorithm("SampleText2.txt");
 	
 	// ----- DRAWING RESULTS -----
 	draw();
@@ -74,6 +74,7 @@ std::string getLines(std::vector<int> lineNumbers) {
 	}
 	return lines;
 }
+
 void algorithm(std::string fileName)
 {
 	std::ifstream sampleTextFile(fileName);
