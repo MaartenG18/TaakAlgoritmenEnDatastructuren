@@ -5,6 +5,8 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+#include <algorithm>
+#include <cctype>
 #include <unordered_map>
 
 int lineNumber{ 0 };
@@ -13,9 +15,10 @@ int totalKeywords{ 0 };
 std::string keyWord;
 std::string token;
 std::string line;
-std::unordered_map<std::string, int> hash;
+std::unordered_map<std::string, std::vector<int>> hash;
 
 void readKeywords();
+std::string getLines(std::vector<int> lineNumbers);
 void draw();
 void algorithm(std::string fileName);
 
@@ -39,7 +42,7 @@ void readKeywords() // Reads the keywords from a txt file and puts them in an un
 
 
 	while (std::getline(keyWordFile, keyWord)) {
-		hash[keyWord] = 0;
+		hash[keyWord].push_back(0);
 	}
 
 	keyWordFile.close();
@@ -55,37 +58,49 @@ void draw() // Draws the correct output.
 	std::cout << "Break down by key word\n";
 
 	for (auto x : hash) {
-		std::cout << "\t" << x.first << ": " << x.second << " Lines: " << ", " << std::endl;
+		std::cout << "\t" << x.first << ": " << x.second[0] << " Lines: " << getLines(x.second) << std::endl;
 	}
 
 	std::cout << "Total key words: " << totalKeywords << std::endl;
 }
 
+std::string getLines(std::vector<int> lineNumbers) {
+	std::string lines;
+	for (int i = 1; i < lineNumbers.size(); i++) {
+		lines += std::to_string(lineNumbers[i]);
+		if (i != lineNumbers.size() - 1) {
+			lines += ", ";
+		}
+	}
+	return lines;
+}
 void algorithm(std::string fileName)
 {
 	std::ifstream sampleTextFile(fileName);
-
+	std::vector<std::string> tokens;
 	while (std::getline(sampleTextFile, line)) {
 		lineNumber++;
-		std::vector<std::string> tokens;
-
+		
 		for (int i = 0; i < line.length(); i++)
 		{
-			if (isspace(line[i])) // TODO Code properder schrijven, misschien een functie voor maken
+			if (isspace(line[i]) || i == line.length() - 1) // TODO Code properder schrijven, misschien een functie voor maken
 			{
-				token = line.substr(0, i); // selecting the first word and passing it to the translate function.
+				if (i < line.length() - 1) {
+					token = line.substr(0, i); // selecting the first word and passing it to the translate function.
+				}
+				else {
+					token = line.substr(0, i + 1);
+				}
 				line = line.substr(i + 1); // removing the first word from the sentence
 				i = 0; // starting again at the start of the sentence
+				std::transform(token.begin(), token.end(), token.begin(), ::tolower); //transforming the string to all lowercase
 				tokens.push_back(token);
 				totalWordsRead++;
-			}
-			else if (i == line.length() - 1)
-			{
-				token = line.substr(0, i + 1); // selecting the first word and passing it to the translate function
-				line = line.substr(i + 1); // removing the first word from the sentence
-				i = 0; // starting again at the start of the sentence
-				tokens.push_back(token);
-				totalWordsRead++;
+				if (hash.find(token) != hash.end()) {
+					hash[token][0]++;    // increment map's value for key
+					hash[token].push_back(lineNumber);
+					totalKeywords++;
+				}
 			}
 		}
 
