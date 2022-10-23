@@ -40,7 +40,8 @@ void readKeywords() // Reads the keywords from a .txt file and puts them in an u
 {
 	std::ifstream keyWordFile("keywords.txt");
 
-	//achter de keys van de hashmap zit een vector van ints als value, het eerste element van deze vectors zijn altijd de keywords naar welke gezocht wordt
+	// de values van de hashmap bevat een vector van ints
+	// het eerste element van deze vectors zijn altijd de keywords naar welke gezocht wordt
 	while (std::getline(keyWordFile, keyWord))
 		hash[keyWord].push_back(0);
 
@@ -62,7 +63,7 @@ void draw() // Draws the correct output.
 	std::cout << "Total key words: " << totalKeywords << std::endl;
 }
 
-std::string getLines(std::vector<int> lineNumbers) // we vragen de lijnnummers van de keywords op door over de vector achter de key te loopen
+std::string getLines(std::vector<int> lineNumbers) // we vragen de lijnnummers van de keywords op, door over de vector (die de value is van de key) te loopen
 {
 	std::string lines;
 	for (int i = 1; i < lineNumbers.size(); i++) {
@@ -77,11 +78,12 @@ void algorithm(std::string fileName) // Search and counts the keywords
 {
 	std::ifstream sampleTextFile(fileName);
 	std::vector<std::string> tokens;
-	std::vector<std::string> punctuation{ ",", "!", "?", "." };
+	std::vector<std::string> punctuation{ ",", "!", "?", "." }; // er kan nog extra punctuatie toegevoegd worden
 	std::string lastLetter;
 
 	while (std::getline(sampleTextFile, line)) {
 		
+		// enkel lijnen met tekst worden geteld
 		if (line.length() > 0)
 			lineNumber++;
 
@@ -97,7 +99,7 @@ void algorithm(std::string fileName) // Search and counts the keywords
 				i = 0; // starting again at the start of the sentence
 				std::transform(token.begin(), token.end(), token.begin(), ::tolower); // transforming the string to all lowercase
 
-				// check on punctuation (, ! ? .) and remove the punctuation if there is
+				// checkt of er punctuatie (, ! ? .) is en als dat het geval is, wordt deze verwijderd
 				lastLetter = token.back();
 				for (int j = 0; j < 4; j++) {
 					if (lastLetter == punctuation[j]) {
@@ -107,10 +109,10 @@ void algorithm(std::string fileName) // Search and counts the keywords
 
 				tokens.push_back(token);
 				totalWordsRead++;
-				//we zoeken het huidige woord binnen de hashmap, als dit aanwezig is verhogen we de eerste waarde van de 
-				//achterliggende vector met 1 (dit getal staat voor het aantal keer dat een bepaalde key in de tekst voorkomt)
-				//vervolgens zetten we de lijnnummer op welke we het woord vonden bij vanachter in de vector
-				//er is voor een hashmap gekozen omdat zoeken in een hashmap best case tijdscomplexiteit O(1) heeft
+				// we zoeken het huidige woord binnen de hashmap, als dit aanwezig is verhogen we de eerste waarde van de 
+				// achterliggende vector met 1 (dit getal staat voor het aantal keer dat een bepaalde key in de tekst voorkomt)
+				// vervolgens zetten we het lijnnummer, op welke lijn we het woord vonden, bij vanachter in de vector
+				// er is voor een hashmap gekozen omdat zoeken in een hashmap worst-case tijdscomplexiteit O(1) heeft
 				if (hash.find(token) != hash.end()) {
 					hash[token][0]++;	// increment map's value for key
 					hash[token].push_back(lineNumber);
