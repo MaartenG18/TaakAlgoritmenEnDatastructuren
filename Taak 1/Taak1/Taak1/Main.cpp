@@ -28,7 +28,7 @@ int main()
 	readKeywords();
 
 	// ----- EXUCUTING ALGORITHM -----
-	algorithm("SampleText2.txt");
+	algorithm("SampleText1.txt");
 	
 	// ----- DRAWING RESULTS -----
 	draw();
@@ -36,14 +36,13 @@ int main()
 	return 0;
 }
 
-void readKeywords() // Reads the keywords from a txt file and puts them in an unordered map
+void readKeywords() // Reads the keywords from a .txt file and puts them in an unordered map
 {
 	std::ifstream keyWordFile("keywords.txt");
 
 
-	while (std::getline(keyWordFile, keyWord)) {
+	while (std::getline(keyWordFile, keyWord))
 		hash[keyWord].push_back(0);
-	}
 
 	keyWordFile.close();
 }
@@ -57,35 +56,29 @@ void draw() // Draws the correct output.
 	std::cout << "Total words read: " << totalWordsRead << std::endl;
 	std::cout << "Break down by key word\n";
 
-	for (auto x : hash) {
-		std::cout << "\t" << x.first << ": " << x.second[0] << " Lines: " << getLines(x.second) << std::endl;
-	}
+	for (auto x : hash)
+		std::cout << "\t" << x.first << ": " << x.second[0] << "\t" << " Lines: " << getLines(x.second) << std::endl;
 
 	std::cout << "Total key words: " << totalKeywords << std::endl;
 }
 
-std::string getLines(std::vector<int> lineNumbers)
+std::string getLines(std::vector<int> lineNumbers) // Get the line numbers of the keywords
 {
 	std::string lines;
 	for (int i = 1; i < lineNumbers.size(); i++) {
 		lines += std::to_string(lineNumbers[i]);
-		if (i != lineNumbers.size() - 1) {
+		if (i != lineNumbers.size() - 1)
 			lines += ", ";
-		}
 	}
 	return lines;
 }
 
-void algorithm(std::string fileName)
+void algorithm(std::string fileName) // Search and counts the keywords
 {
 	std::ifstream sampleTextFile(fileName);
 	std::vector<std::string> tokens;
 	std::vector<std::string> punctuation{ ",", "!", "?", "." };
 	std::string lastLetter;
-
-	//punctuation.push_back(",");
-
-	// ",", "!", "?", "." 
 
 	while (std::getline(sampleTextFile, line)) {
 		
@@ -102,9 +95,9 @@ void algorithm(std::string fileName)
 
 				line = line.substr(i + 1); // removing the first word from the sentence
 				i = 0; // starting again at the start of the sentence
-				std::transform(token.begin(), token.end(), token.begin(), ::tolower); //transforming the string to all lowercase
+				std::transform(token.begin(), token.end(), token.begin(), ::tolower); // transforming the string to all lowercase
 
-				// check on punctuation (, ! ? .) and remove the punctuation if there is punctuation
+				// check on punctuation (, ! ? .) and remove the punctuation if there is
 				lastLetter = token.back();
 				for (int j = 0; j < 4; j++) {
 					if (lastLetter == punctuation[j]) {
@@ -115,7 +108,7 @@ void algorithm(std::string fileName)
 				tokens.push_back(token);
 				totalWordsRead++;
 				if (hash.find(token) != hash.end()) {
-					hash[token][0]++;    // increment map's value for key
+					hash[token][0]++;	// increment map's value for key
 					hash[token].push_back(lineNumber);
 					totalKeywords++;
 				}
