@@ -79,22 +79,38 @@ void algorithm(std::string fileName)
 {
 	std::ifstream sampleTextFile(fileName);
 	std::vector<std::string> tokens;
+	std::vector<std::string> punctuation{ ",", "!", "?", "." };
+	std::string lastLetter;
+
+	//punctuation.push_back(",");
+
+	// ",", "!", "?", "." 
+
 	while (std::getline(sampleTextFile, line)) {
 		lineNumber++;
 		
-		for (int i = 0; i < line.length(); i++)
-		{
-			if (isspace(line[i]) || i == line.length() - 1) // TODO Code properder schrijven, misschien een functie voor maken
-			{
+		for (int i = 0; i < line.length(); i++){
+			if ((isspace(line[i])) || (i == line.length() - 1)) { // TODO Code properder schrijven, misschien een functie voor maken
+				
 				if (i < line.length() - 1) {
 					token = line.substr(0, i); // selecting the first word and passing it to the translate function.
 				}
 				else {
 					token = line.substr(0, i + 1);
 				}
+
 				line = line.substr(i + 1); // removing the first word from the sentence
 				i = 0; // starting again at the start of the sentence
 				std::transform(token.begin(), token.end(), token.begin(), ::tolower); //transforming the string to all lowercase
+
+				// check on punctuation (, ! ? .) and remove the punctuation if there is punctuation
+				lastLetter = token.back();
+				for (int j = 0; j < 4; j++) {
+					if (lastLetter == punctuation[j]) {
+						token.pop_back();
+					}
+				}
+
 				tokens.push_back(token);
 				totalWordsRead++;
 				if (hash.find(token) != hash.end()) {
@@ -104,9 +120,6 @@ void algorithm(std::string fileName)
 				}
 			}
 		}
-
-		
 	}
-
 	sampleTextFile.close();
 }
