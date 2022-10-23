@@ -22,8 +22,8 @@ std::string getLines(std::vector<int> lineNumbers);
 void draw();
 void algorithm(std::string fileName);
 
-int main() {
-
+int main()
+{
 	// ----- READING KEYWORDS -----
 	readKeywords();
 
@@ -64,7 +64,8 @@ void draw() // Draws the correct output.
 	std::cout << "Total key words: " << totalKeywords << std::endl;
 }
 
-std::string getLines(std::vector<int> lineNumbers) {
+std::string getLines(std::vector<int> lineNumbers)
+{
 	std::string lines;
 	for (int i = 1; i < lineNumbers.size(); i++) {
 		lines += std::to_string(lineNumbers[i]);
@@ -87,17 +88,17 @@ void algorithm(std::string fileName)
 	// ",", "!", "?", "." 
 
 	while (std::getline(sampleTextFile, line)) {
-		lineNumber++;
 		
+		if (line.length() > 0)
+			lineNumber++;
+
 		for (int i = 0; i < line.length(); i++){
+
 			if ((isspace(line[i])) || (i == line.length() - 1)) { // TODO Code properder schrijven, misschien een functie voor maken
-				
-				if (i < line.length() - 1) {
+				if (i < line.length() - 1)
 					token = line.substr(0, i); // selecting the first word and passing it to the translate function.
-				}
-				else {
+				else
 					token = line.substr(0, i + 1);
-				}
 
 				line = line.substr(i + 1); // removing the first word from the sentence
 				i = 0; // starting again at the start of the sentence
