@@ -36,12 +36,13 @@ int main()
 	return 0;
 }
 
-void readKeywords() // Leest de keyword in vanuit een .txt file en plaatst ze in een unordered map.
+void readKeywords() // Leest de keywords in vanuit een .txt file en plaatst ze in een unordered map.
 {
 	std::ifstream keyWordFile("keywords.txt");
 
-	// de values van de hashmap bevat een vector van ints
-	// het eerste element van deze vectors zijn altijd de keywords naar welke gezocht wordt
+	// de keys zijn de keywords waarnaar gezocht wordt en de values van de hashmap zijn vectoren van ints
+	// in deze vectoren is het eerste element altijd de teller van hoe vaak de key of keyword voorkomt in de tekst
+	// en alle ints erachter zijn de lijnnummers van waar de keys of keywords in voorkomen
 	while (std::getline(keyWordFile, keyWord))
 		hash[keyWord].push_back(0);
 
@@ -74,7 +75,7 @@ std::string getLines(std::vector<int> lineNumbers) // we vragen de lijnnummers v
 	return lines;
 }
 
-void algorithm(std::string fileName) // Zoekt en telt alle keywords
+void algorithm(std::string fileName) // Zoekt en telt alle keywords.
 {
 	std::ifstream sampleTextFile(fileName);
 	std::vector<std::string> tokens;
@@ -96,7 +97,7 @@ void algorithm(std::string fileName) // Zoekt en telt alle keywords
 					token = line.substr(0, i + 1);
 
 				line = line.substr(i + 1); // het eerste woord van de lijn verwijderen
-				i = 0; // terug aan het begin van line beginnen
+				i = 0; // terug aan het begin van een lijn beginnen
 				std::transform(token.begin(), token.end(), token.begin(), ::tolower); // de string tansformeren naar lowwercase
 
 				// checkt of er punctuatie (, ! ? .) is en als dat het geval is, wordt deze verwijderd
@@ -109,6 +110,7 @@ void algorithm(std::string fileName) // Zoekt en telt alle keywords
 
 				tokens.push_back(token);
 				totalWordsRead++;
+
 				// we zoeken het huidige woord binnen de hashmap, als dit aanwezig is verhogen we de eerste waarde van de 
 				// achterliggende vector met 1 (dit getal staat voor het aantal keer dat een bepaalde key in de tekst voorkomt)
 				// vervolgens zetten we het lijnnummer, op welke lijn we het woord vonden, bij vanachter in de vector
