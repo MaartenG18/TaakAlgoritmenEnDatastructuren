@@ -24,19 +24,19 @@ void algorithm(std::string fileName);
 
 int main()
 {
-	// ----- READING KEYWORDS -----
+	// ----- KEYWORDS INLEZEN -----
 	readKeywords();
 
-	// ----- EXUCUTING ALGORITHM -----
+	// ----- ALGORITME UITVOEREN -----
 	algorithm("SampleText1.txt");
 	
-	// ----- DRAWING RESULTS -----
+	// ----- RESULTATEN TEKENEN -----
 	draw();
 
 	return 0;
 }
 
-void readKeywords() // Reads the keywords from a .txt file and puts them in an unordered map
+void readKeywords() // Leest de keyword in vanuit een .txt file en plaatst ze in een unordered map.
 {
 	std::ifstream keyWordFile("keywords.txt");
 
@@ -48,7 +48,7 @@ void readKeywords() // Reads the keywords from a .txt file and puts them in an u
 	keyWordFile.close();
 }
 
-void draw() // Draws the correct output.
+void draw() // Tekent de output.
 {
 	std::cout << "**********************" << std::endl;
 	std::cout << "***** Statistics *****" << std::endl;
@@ -74,7 +74,7 @@ std::string getLines(std::vector<int> lineNumbers) // we vragen de lijnnummers v
 	return lines;
 }
 
-void algorithm(std::string fileName) // Search and counts the keywords
+void algorithm(std::string fileName) // Zoekt en telt alle keywords
 {
 	std::ifstream sampleTextFile(fileName);
 	std::vector<std::string> tokens;
@@ -95,9 +95,9 @@ void algorithm(std::string fileName) // Search and counts the keywords
 				else
 					token = line.substr(0, i + 1);
 
-				line = line.substr(i + 1); // removing the first word from the sentence
-				i = 0; // starting again at the start of the sentence
-				std::transform(token.begin(), token.end(), token.begin(), ::tolower); // transforming the string to all lowercase
+				line = line.substr(i + 1); // het eerste woord van de lijn verwijderen
+				i = 0; // terug aan het begin van line beginnen
+				std::transform(token.begin(), token.end(), token.begin(), ::tolower); // de string tansformeren naar lowwercase
 
 				// checkt of er punctuatie (, ! ? .) is en als dat het geval is, wordt deze verwijderd
 				lastLetter = token.back();
@@ -114,7 +114,7 @@ void algorithm(std::string fileName) // Search and counts the keywords
 				// vervolgens zetten we het lijnnummer, op welke lijn we het woord vonden, bij vanachter in de vector
 				// er is voor een hashmap gekozen omdat zoeken in een hashmap worst-case tijdscomplexiteit O(1) heeft
 				if (hash.find(token) != hash.end()) {
-					hash[token][0]++;	// increment map's value for key
+					hash[token][0]++;	// waarde verhogen voor de key van de unordered map
 					hash[token].push_back(lineNumber);
 					totalKeywords++;
 				}
