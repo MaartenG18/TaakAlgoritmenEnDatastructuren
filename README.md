@@ -6,4 +6,4 @@ Verbeteringen indienen voor dinsdag 01/11/2022.
 
 - [x] Klassen maken voor mooiere code.
 - [x] Geen globale variabelen.
-- [ ] `.,?!` niet in een vector steken.
+- [x] `.,?!` niet in een vector steken.
