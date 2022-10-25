@@ -2,6 +2,8 @@
 
 ## Feedback
 
+Verbeteringen indienen voor dinsdag 01/11/2022.
+
 - [ ] Klassen maken voor mooiere code.
 - [ ] Geen globale variabelen.
 - [ ] `.,?!` niet in een vector steken.
