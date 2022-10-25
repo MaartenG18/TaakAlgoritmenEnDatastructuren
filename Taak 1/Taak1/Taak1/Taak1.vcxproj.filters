@@ -18,10 +18,18 @@
     <ClCompile Include="Main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="WordSeeker.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Text Include="keywords.txt" />
     <Text Include="SampleText1.txt" />
     <Text Include="SampleText2.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="WordSeeker.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

@@ -128,11 +128,15 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="WordSeeker.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="keywords.txt" />
     <Text Include="SampleText1.txt" />
     <Text Include="SampleText2.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="WordSeeker.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
