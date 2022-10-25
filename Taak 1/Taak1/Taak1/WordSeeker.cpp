@@ -1,13 +1,14 @@
+// Yara Mijnendonckx
+// Simon Knuts
+// Maarten Gielkens
+
 #include "WordSeeker.h"
 #include <iostream>
 #include <fstream>
 #include <cctype>
 #include <algorithm>
 
-
-WordSeeker::WordSeeker() {
-
-}
+WordSeeker::WordSeeker() {}
 
 void WordSeeker::readKeywords(std::string fileName) // Leest de keywords in vanuit een .txt file en plaatst ze in een unordered map.
 {
@@ -52,7 +53,7 @@ void WordSeeker::algorithm(std::string fileName) // Zoekt en telt alle keywords.
 {
 	std::ifstream sampleTextFile(fileName);
 	std::vector<std::string> tokens;
-	std::vector<std::string> punctuation{ ",", "!", "?", "." }; // er kan nog extra punctuatie toegevoegd worden
+	std::unordered_map<std::string, bool> punctuation = {{ "," , true }, { "!" , true }, { "?", true }, { ".", true }};
 	std::string lastLetter;
 
 	while (std::getline(sampleTextFile, line)) {
@@ -71,15 +72,12 @@ void WordSeeker::algorithm(std::string fileName) // Zoekt en telt alle keywords.
 
 				line = line.substr(i + 1); // het eerste woord van de lijn verwijderen
 				i = 0; // terug aan het begin van een lijn beginnen
-				std::transform(token.begin(), token.end(), token.begin(), ::tolower); // de string tansformeren naar lowwercase
+				std::transform(token.begin(), token.end(), token.begin(), ::tolower); // de string tansformeren naar lowercase
 
 				// checkt of er punctuatie (, ! ? .) is en als dat het geval is, wordt deze verwijderd
 				lastLetter = token.back();
-				for (int j = 0; j < 4; j++) {
-					if (lastLetter == punctuation[j]) {
-						token.pop_back();
-					}
-				}
+				if (punctuation.find(lastLetter) != punctuation.end())
+					token.pop_back();
 
 				tokens.push_back(token);
 				totalWordsRead++;

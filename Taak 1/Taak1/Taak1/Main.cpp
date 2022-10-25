@@ -2,6 +2,10 @@
 // Simon Knuts
 // Maarten Gielkens
 
+// Aanpassingen tov de eerste versie:
+// 1. Met klasses gewerkt waardoor er ook geen globale variabelen meer zijn
+// 2. De punctuatie in een hashmap gezet ipv een vector, hierdoor is dit stukje qua tijdscomplexiteit beter
+
 #include "WordSeeker.h"
 
 int main()
@@ -19,4 +23,3 @@ int main()
 
 	return 0;
 }
-
