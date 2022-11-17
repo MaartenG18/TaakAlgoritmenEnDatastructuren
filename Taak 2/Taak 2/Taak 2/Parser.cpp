@@ -56,7 +56,6 @@ std::vector<std::string> Parser::splitLineActor(std::string line)
 		if (line.at(i) == '\t' && wordIndex == 1) 
 		{
 			id = line.substr(0, i);
-			std::cout << id << std::endl;
 			line = line.substr(i + 1);
 
 			wordIndex++;
@@ -84,7 +83,6 @@ std::vector<std::string> Parser::splitLineActor(std::string line)
 			words.push_back(lastName);
 		}
 	}
-
 	return words;
 }
 
@@ -102,8 +100,8 @@ std::vector<std::string> Parser::splitLineMovie(std::string line)
 		if (line.at(i) == '\t' && wordIndex == 1)
 		{
 			id = line.substr(0, i);
-			std::cout << id << std::endl;
 			line = line.substr(i + 1);
+			std::cout << id << std::endl;
 
 			wordIndex++;
 			i = 0;
@@ -115,6 +113,7 @@ std::vector<std::string> Parser::splitLineMovie(std::string line)
 			name = line.substr(0, i);
 			line = line.substr(i + 1);
 			std::cout << name << std::endl;
+
 			wordIndex++;
 			i = 0;
 
@@ -122,21 +121,18 @@ std::vector<std::string> Parser::splitLineMovie(std::string line)
 		}
 		else if (line.at(i) == ' ' && line.at(i + 1) == ' ') {
 			line = line.substr(i + 2);
-
-			wordIndex++;
 			i = 0;
 		}
 		else if (line.at(i) == ')' && wordIndex == 3)
 		{
-			year = line.substr(0, i);
+			year = line.substr(1, i-1);
 			std::cout << year << std::endl;
+
 			wordIndex++;
 			i = 0;
 
 			words.push_back(year);
 		}	
-
 	}
-
 	return words;
 }
