@@ -14,4 +14,37 @@
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
   </ItemGroup>
+  <ItemGroup>
+    <Text Include="actors.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="actors100K.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="movies.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="movies100K.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="actorsKort.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="moviesKort.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Parser.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Parser.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
 </Project>

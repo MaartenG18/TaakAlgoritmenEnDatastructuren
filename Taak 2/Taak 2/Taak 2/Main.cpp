@@ -2,7 +2,7 @@
 
 int main()
 {
-	Parser* Parser = new Parser();
-
-
+	Parser* parser = new Parser();
+	parser->readActors("actorsKort.txt");
+	parser->readMovies("moviesKort.txt");
 }
