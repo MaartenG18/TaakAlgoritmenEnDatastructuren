@@ -1,5 +1,6 @@
 #pragma once
 
+#include "Trie.h"
 #include <string>
 #include <vector>
 
@@ -11,6 +12,7 @@ public:
 	void readMovies(std::string fileName);
 
 private:
+	Trie* trie = new Trie();
 	std::vector<std::string> splitLineActor(std::string line);
 	std::vector<std::string> splitLineMovie(std::string line);
 };
