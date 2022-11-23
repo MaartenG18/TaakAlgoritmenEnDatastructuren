@@ -24,9 +24,15 @@ void Parser::readActors(Trie* trie, std::string fileName)
 		std::vector<std::string> actor = splitLineActor(line);
 		//std::cout << actor[1] + ' ' + actor[2] + ' ' + actor[0] << std::endl;
 		//std::cout << actor[0] + ' ' + actor[2] + ' ' + actor[1] << std::endl;
-		trie->insert(actor[1] + ' ' + actor[2] + ' ' + actor[0]);
+		trie->insert(actor[1] + '_' + actor[2] + ' ' + actor[0]);
+		trie->insert("Narayana_A.L. 100");
+		trie->insert(actor[2] + '$' + actor[1] + ' ' + actor[0]);
 		//std::cout << trie->search("simon knuts") << std::endl;
-		std::cout << trie->search("Jack Aaronson 1004") << std::endl;
+		auto results = trie->search("Narayan");
+		for (int i = 0; i < results->size(); i++)
+		{
+			std::cout << results->at(i) << std::endl;
+		}
 	}
 
 	file.close();
