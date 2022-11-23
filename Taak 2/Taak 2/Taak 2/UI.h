@@ -1,9 +1,10 @@
 #pragma once
-#include <string>
 
+#include "Trie.h"
+#include <string>
 
 class UI
 {
 public:
-	std::string askInput();
+	std::string askInput(Trie* trie);
 };

@@ -9,5 +9,5 @@ int main()
 	parser->readActors(trie, "actorsKort.txt");
 	//parser->readMovies(trie, "moviesKort.txt");
 
-	ui->askInput();
+	ui->askInput(trie);
 }

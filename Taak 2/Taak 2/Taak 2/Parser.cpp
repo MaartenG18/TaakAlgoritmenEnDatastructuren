@@ -20,22 +20,11 @@ void Parser::readActors(Trie* trie, std::string fileName)
 
 	while (std::getline(file, line))
 	{
-		//std::cout << line << std::endl;
 		std::vector<std::string> actor = splitLineActor(line);
 
 		trie->insert(actor[1] + ' ' + actor[2] + '_' + actor[0]);	// Firstname Lastname_id
 		trie->insert(actor[2] + ' ' + actor[1] + '$' + actor[0]);	// Lastname Firstname$id
-		//std::cout << trie->searchAndAutoComplete("simon knuts") << std::endl;
-		/*auto results = trie->searchAndAutoComplete("Narayan");
-		for (int i = 0; i < results->size(); i++)
-		{
-			std::cout << results->at(i) << std::endl;
-		}
-		auto results2 = trie->searchAndAutoComplete("A.L");
-		for (int i = 0; i < results2->size(); i++)
-		{
-			std::cout << results2->at(i) << std::endl;
-		}*/
+
 	}
 
 	file.close();
@@ -49,6 +38,7 @@ void Parser::readMovies(Trie* trie, std::string fileName)
 
 	while (std::getline(file, line))
 	{
+		// nog aan trie toevoegen
 		std::cout << line << std::endl;
 		splitLineMovie(line);
 	}
