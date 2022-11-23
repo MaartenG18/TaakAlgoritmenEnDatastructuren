@@ -4,9 +4,11 @@
 int main()
 {
 	UI* ui = new UI();
+	Trie* trie = new Trie();
 	Parser* parser = new Parser();
-	parser->readActors("actorsKort.txt");
-	//parser->readMovies("moviesKort.txt");
+	parser->readActors(trie, "actorsKort.txt");
+	//parser->readMovies(trie, "moviesKort.txt");
+
 	while (ui->askInput() != "q") {
 		ui->askInput();
 	};

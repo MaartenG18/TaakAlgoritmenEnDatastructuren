@@ -1,44 +1,88 @@
 #include "Trie.h"
 #include <string>
 
-Trie* Trie::getNewTrieNode()
+
+// ----- Constructors -----
+
+Trie::Trie()
 {
-	Trie* node = new Trie;
-	node->endOfWord = false;
+	setRoot(nullptr);
+}
+
+
+// ----- Methods -----
+
+Node* Trie::makeNewNode()
+{
+	Node* node = new Node(false);
 	return node;
 }
 
-void Trie::insert(Trie*& root, std::string str)
+void Trie::insert(std::string str)
 {
-	if (root == nullptr)
-		root = getNewTrieNode();
-
-	Trie* temp = root;
-	for (int i = 0; i < str.length(); i++) {
-		char x = str[i];
-		if (temp->map.find(x) == temp->map.end())
-			temp->map[x] = getNewTrieNode();
-
-		temp = temp->map[x];
+	if (getRoot() == nullptr)
+	{
+		setRoot(makeNewNode());
 	}
 
-	temp->endOfWord = true;
+	Node* temp = getRoot();
+
+	for (int i = 0; i < str.length(); i++) 
+	{
+		char x = str[i];
+		if (temp->getMap()->find(x) == temp->getMap()->end())
+		{
+			std::pair<char, Node*> pair{ x, makeNewNode() };
+			temp->getMap()->insert(pair);
+		}
+
+		temp = temp->getMap()->at(x);
+	}
+
+	temp->setEndOfWord(true);
 }
 
 //search functie maakt nog een fout, insert werkt denk ik
-/*bool Trie::search(Trie* root, std::string str)
+bool Trie::search(std::string str)
 {
-	if (root == nullptr)
+	if (getRoot() == nullptr)
+	{
 		return false;
+	}
 
-	Trie* temp = root;
-	for (int i = 0; i < str.length(); i++) {
+	Node* temp = getRoot();
 
-		temp = temp->map[str[i]];
+	for (int i = 0; i < str.length(); i++) 
+	{
+		char x = str[i];
+		if (temp->getMap()->find(x) == temp->getMap()->end())
+		{
+			return false;
+		}
+		else
+		{
+			temp = temp->getMap()->at(str[i]);
+		}
 
 		if (temp == nullptr)
 			return false;
 	}
 
-	return temp->endOfWord;
-}*/
+	return temp->getEndOfWord();
+}
+
+
+// ----- Setters -----
+
+void Trie::setRoot(Node* root)
+{
+	m_root = root;
+}
+
+
+// ----- Getters -----
+
+Node* Trie::getRoot() const
+{
+	return m_root;
+}

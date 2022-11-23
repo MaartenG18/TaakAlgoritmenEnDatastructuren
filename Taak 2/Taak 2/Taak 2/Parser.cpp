@@ -12,7 +12,7 @@ Parser::Parser() {
 
 // ----- Methods ------
 
-void Parser::readActors(std::string fileName)
+void Parser::readActors(Trie* trie, std::string fileName)
 {
 	std::string line;
 
@@ -24,15 +24,15 @@ void Parser::readActors(std::string fileName)
 		std::vector<std::string> actor = splitLineActor(line);
 		//std::cout << actor[1] + ' ' + actor[2] + ' ' + actor[0] << std::endl;
 		//std::cout << actor[0] + ' ' + actor[2] + ' ' + actor[1] << std::endl;
-		trie->insert(trie, actor[1] + ' ' + actor[2] + ' ' + actor[0]);
-		//std::cout << trie->search(trie, "simon knuts") << std::endl;
-		//std::cout << trie->search(trie, "Jack Aaronson 1004") << std::endl;
+		trie->insert(actor[1] + ' ' + actor[2] + ' ' + actor[0]);
+		//std::cout << trie->search("simon knuts") << std::endl;
+		std::cout << trie->search("Jack Aaronson 1004") << std::endl;
 	}
 
 	file.close();
 }
 
-void Parser::readMovies(std::string fileName) 
+void Parser::readMovies(Trie* trie, std::string fileName) 
 {
 	std::string line;
 

@@ -6,12 +6,15 @@ std::string UI::askInput() {
 	std::string input;
 	std::cout << "Enter search string, end in a '#' for suggestions. q to quit" << std::endl;
 	std::getline(std::cin, input);
-	if (input.back() == '#') {
+
+	if (input.back() == '#') 
+	{
 		input = input.substr(0, input.size() - 1);
 		std::cout << input << std::endl;
 		return input;
 	}
-	else {
+	else 
+	{
 		std::cout << input << std::endl;
 		return input;
 	}
