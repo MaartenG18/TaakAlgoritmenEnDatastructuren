@@ -41,8 +41,7 @@ void Trie::insert(std::string str)
 	temp->setEndOfWord(true);
 }
 
-//search functie maakt nog een fout, insert werkt denk ik
-std::shared_ptr<std::vector<std::string>> Trie::search(std::string str)
+std::shared_ptr<std::vector<std::string>> Trie::searchAndAutoComplete(std::string str)
 {
 	auto results = std::make_shared<std::vector<std::string>>();
 
@@ -68,12 +67,12 @@ std::shared_ptr<std::vector<std::string>> Trie::search(std::string str)
 
 	std::string word{};
 
-	// Laatste van de search string bereikt
-	collectAllPostfixes(temp, str, word, results);
+	// Laatste van de searchAndAutoComplete string bereikt
+	collectAllWords(temp, str, word, results);
 	return results;
 }
 
-void Trie::collectAllPostfixes(Node* node, std::string prefix, std::string word, std::shared_ptr<std::vector<std::string>> words)
+void Trie::collectAllWords(Node* node, std::string prefix, std::string word, std::shared_ptr<std::vector<std::string>> words)
 {
 	Node* temp = node;
 
@@ -86,7 +85,7 @@ void Trie::collectAllPostfixes(Node* node, std::string prefix, std::string word,
 		}
 		else
 		{
-			collectAllPostfixes(temp->getMap()->at(i->first), prefix, word + i->first, words);
+			collectAllWords(temp->getMap()->at(i->first), prefix, word + i->first, words);
 		}
 	}
 

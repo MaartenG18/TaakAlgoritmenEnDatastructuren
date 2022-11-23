@@ -7,7 +7,12 @@ std::string UI::askInput() {
 	std::cout << "Enter search string, end in a '#' for suggestions. q to quit" << std::endl;
 	std::getline(std::cin, input);
 
-	if (input.back() == '#') 
+	if (input == "q")
+	{
+		std::cout << "Quit succeeded." << std::endl;
+		return "";
+	}
+	else if (input.back() == '#') 
 	{
 		input = input.substr(0, input.size() - 1);
 		std::cout << input << std::endl;

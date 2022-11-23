@@ -13,13 +13,13 @@ public:
 	Trie();
 
 	void insert(std::string str); // Method to insert in the trie
-	std::shared_ptr<std::vector<std::string>> search(std::string str); // Method to search in the trie
+	std::shared_ptr<std::vector<std::string>> searchAndAutoComplete(std::string str); // Method to searchAndAutoComplete in the trie
 
 private:
 	Node* m_root{};
 
 	Node* makeNewNode();
-	void collectAllPostfixes(Node* node, std::string prefix, std::string word, std::shared_ptr<std::vector<std::string>> words);
+	void collectAllWords(Node* node, std::string prefix, std::string word, std::shared_ptr<std::vector<std::string>> words);
 
 	void setRoot(Node* root); // Setter
 
