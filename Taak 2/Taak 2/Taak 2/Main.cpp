@@ -9,5 +9,15 @@ int main()
 	parser->readActors(trie, "actorsKort.txt");
 	//parser->readMovies(trie, "moviesKort.txt");
 
-	ui->askInput(trie);
+	while (true)
+	{
+		std::string input = ui->askInput(trie);
+		if (input != "q") {
+			ui->processInput(trie, input);
+		}
+		else
+		{
+			break;
+		}
+	}
 }
