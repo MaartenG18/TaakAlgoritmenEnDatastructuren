@@ -1,4 +1,5 @@
 #include "SearchEngine.h"
+#include <iostream>
 
 
 // ----- Constructors -----
@@ -44,7 +45,15 @@ void SearchEngine::start()
 
 void SearchEngine::processInput(std::string input)
 {
-	if (input.back() == '#')
+	if (input.size() == 4 && (input[0] == '1' || input[0] == '2')) {
+		if (m_movieMap->find(input) == m_movieMap->end()) {
+			getUi()->printError(UI::ErrorType::wordNotFound);
+		}
+		else {
+			getUi()->printFilmsFromYear(m_movieMap->at(input));
+		}
+	}
+	else if (input.back() == '#')
 	{
 		input.pop_back();
 		auto results = getTrie()->searchAndAutoComplete(input);

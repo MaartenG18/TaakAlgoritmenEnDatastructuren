@@ -147,10 +147,10 @@ std::vector<std::string> Parser::splitLineMovie(std::string line)
 void Parser::makeYearMap(std::shared_ptr<std::unordered_map<std::string, std::vector<std::string>>> map, std::vector<std::string> movie) {
 	if (map->find(movie[2]) == map->end()) {
 		std::vector<std::string> movies{};
-		movies.push_back(movie[0] + movie[1]);
+		movies.push_back('(' + movie[0] + ')' + ':' + ' ' + movie[1]);
 		map->insert({movie[2], movies });
 	}
 	else {
-		map->at(movie[2]).push_back(movie[0] + movie[1]);
+		map->at(movie[2]).push_back('(' + movie[0] + ')' + ':' + ' ' + movie[1]);
 	}
 }
