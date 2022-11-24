@@ -88,6 +88,10 @@ void SearchEngine::setParser(Parser* parser)
 	m_parser = parser;
 }
 
+void SearchEngine::setMovieMap(std::shared_ptr<std::unordered_map<std::string, std::vector<std::string>>> map) {
+	m_movieMap = map;
+}
+
 
 // ----- Getters -----
 
