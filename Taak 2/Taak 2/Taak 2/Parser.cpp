@@ -38,9 +38,10 @@ void Parser::readMovies(Trie* trie, std::string fileName)
 
 	while (std::getline(file, line))
 	{
-		// nog aan trie toevoegen
+		std::vector<std::string> movie = splitLineMovie(line);
+
+		// nog aan trie toevoegen + aan hashmap toevoegen
 		std::cout << line << std::endl;
-		splitLineMovie(line);
 	}
 
 	file.close();
