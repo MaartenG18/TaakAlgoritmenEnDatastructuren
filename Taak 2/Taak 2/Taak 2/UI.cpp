@@ -2,6 +2,18 @@
 #include <string>
 #include <iostream>
 
+
+// ----- Constructors -----
+
+UI::UI()
+{
+
+}
+
+
+// ----- Methods -----
+
+
 std::string UI::askInput(Trie* trie)
 {
 	std::string input;
@@ -11,59 +23,33 @@ std::string UI::askInput(Trie* trie)
 	return input;
 }
 
-void UI::processInput(Trie* trie, std::string input)
+void UI::printError(ErrorType errorType)
 {
-	if (input == "q")
+	switch (errorType)
 	{
-		return;
+	case UI::ErrorType::wordNotFound:
+		std::cout << "We cannot find anything like that." << std::endl;
+		break;
+	default:
+		break;
 	}
-	else if (input.back() == '#')
+}
+
+void UI::printResults(std::shared_ptr<std::vector<std::string>> results)
+{
+	for (int i = 0; i < results->size(); i++)
 	{
-		input.pop_back();
-		auto results = trie->searchAndAutoComplete(input);
-
-		if (results->size() == 0)
+		for (int j = 0; j < results->at(i).length(); j++)
 		{
-			std::cout << "We cannot find anything like that." << std::endl;
-		}
-
-		for (int i = 0; i < results->size(); i++)
-		{
-			for (int j = 0; j < results->at(i).length(); j++)
+			if (results->at(i).at(j) == '_')	// Search for Firstname Lastname
 			{
-				if (results->at(i).at(j) == '_')	// Search for Firstname Lastname
-				{
-					std::string id = results->at(i).substr(j + 1, results->at(i).length() - (j + 1));
-					std::cout << results->at(i).substr(0, j) << " (" << id << ")" << std::endl;
-				}
-				if (results->at(i).at(j) == '$')	// Search for Lastname Firstname
-				{
-					std::string id = results->at(i).substr(j + 1, results->at(i).length() - (j + 1));
-					std::cout << results->at(i).substr(0, j) << " (" << id << ")" << std::endl;
-				}
+				std::string id = results->at(i).substr(j + 1, results->at(i).length() - (j + 1));
+				std::cout << results->at(i).substr(0, j) << " (" << id << ")" << std::endl;
 			}
-		}
-	}
-	else
-	{
-		auto results = trie->searchAndAutoComplete(input);
-
-		if (results->size() == 0)	// die geeft een 'abort error' als de zoekterm niet in de trie zit
-		{
-			std::cout << "We cannot find anything like that." << std::endl;
-		}
-
-		for (int j = 0; j < results->at(0).length(); j++)
-		{
-			if (results->at(0).at(j) == '_')	// Search for Firstname Lastname
+			if (results->at(i).at(j) == '$')	// Search for Lastname Firstname
 			{
-				std::string id = results->at(0).substr(j + 1, results->at(0).length() - (j + 1));
-				std::cout << results->at(0).substr(0, j) << " (" << id << ")" << std::endl;
-			}
-			if (results->at(0).at(j) == '$')	// Search for Lastname Firstname
-			{
-				std::string id = results->at(0).substr(j + 1, results->at(0).length() - (j + 1));
-				std::cout << results->at(0).substr(0, j) << " (" << id << ")" << std::endl;
+				std::string id = results->at(i).substr(j + 1, results->at(i).length() - (j + 1));
+				std::cout << results->at(i).substr(0, j) << " (" << id << ")" << std::endl;
 			}
 		}
 	}

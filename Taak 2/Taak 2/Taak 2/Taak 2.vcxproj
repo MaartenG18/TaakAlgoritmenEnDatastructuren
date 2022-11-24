@@ -138,12 +138,14 @@
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Node.cpp" />
     <ClCompile Include="Parser.cpp" />
+    <ClCompile Include="SearchEngine.cpp" />
     <ClCompile Include="Trie.cpp" />
     <ClCompile Include="UI.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Node.h" />
     <ClInclude Include="Parser.h" />
+    <ClInclude Include="SearchEngine.h" />
     <ClInclude Include="Trie.h" />
     <ClInclude Include="UI.h" />
   </ItemGroup>

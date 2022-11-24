@@ -6,6 +6,13 @@
 class UI
 {
 public:
+	enum class ErrorType {
+		wordNotFound
+	};
+
+	UI();
+
 	std::string askInput(Trie* trie);
-	void processInput(Trie* trie, std::string input);
+	void printError(ErrorType errorType);
+	void printResults(std::shared_ptr<std::vector<std::string>> results);
 };
