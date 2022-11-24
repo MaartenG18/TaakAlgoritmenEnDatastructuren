@@ -148,6 +148,9 @@ void Parser::makeYearMap(std::shared_ptr<std::unordered_map<std::string, std::ve
 	if (map->find(movie[2]) == map->end()) {
 		std::vector<std::string> movies{};
 		movies.push_back(movie[0] + movie[1]);
-
+		map->insert({movie[3], movies });
+	}
+	else {
+		//achter de het juiste jaartal als key gewoon een nieuwe film toevoegen in de vector
 	}
 }
