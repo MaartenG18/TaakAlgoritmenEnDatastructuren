@@ -46,11 +46,11 @@ void SearchEngine::start()
 void SearchEngine::processInput(std::string input)
 {
 	if (input.size() == 4 && (input[0] == '1' || input[0] == '2')) {
-		if (m_movieMap->find(input) == m_movieMap->end()) {
+		if (getMovieMap()->find(input) == getMovieMap()->end()) {
 			getUi()->printError(UI::ErrorType::wordNotFound);
 		}
 		else {
-			getUi()->printFilmsFromYear(m_movieMap->at(input));
+			getUi()->printFilmsFromYear(getMovieMap()->at(input));
 		}
 	}
 	else if (input.back() == '#')
