@@ -30,7 +30,7 @@ void Parser::readActors(Trie* trie, std::string fileName)
 	file.close();
 }
 
-void Parser::readMovies(Trie* trie, std::string fileName) 
+void Parser::readMovies(Trie* trie, std::string fileName, std::shared_ptr<std::unordered_map<std::string, std::vector<std::string>>> map)
 {
 	std::string line;
 
@@ -40,8 +40,9 @@ void Parser::readMovies(Trie* trie, std::string fileName)
 	{
 		std::vector<std::string> movie = splitLineMovie(line);
 
-		// nog aan trie toevoegen + aan hashmap toevoegen
-		std::cout << line << std::endl;
+		trie->insert(movie[1] + ' ' + movie[2] + 'µ' + movie[0]);
+		makeYearMap(map, movie);
+		//std::cout << line << std::endl;
 	}
 
 	file.close();
@@ -106,7 +107,7 @@ std::vector<std::string> Parser::splitLineMovie(std::string line)
 		{
 			id = line.substr(0, i);
 			line = line.substr(i + 1);
-			std::cout << id << std::endl;
+			//std::cout << id << std::endl;
 
 			wordIndex++;
 			i = 0;
@@ -117,12 +118,13 @@ std::vector<std::string> Parser::splitLineMovie(std::string line)
 		{
 			name = line.substr(0, i);
 			line = line.substr(i + 1);
-			std::cout << name << std::endl;
+			//std::cout << name << std::endl;
 
 			wordIndex++;
 			i = 0;
 
 			words.push_back(name);
+			words.push_back(" ");
 		}
 		else if (line.at(i) == ' ' && line.at(i + 1) == ' ') {
 			line = line.substr(i + 2);
@@ -131,13 +133,21 @@ std::vector<std::string> Parser::splitLineMovie(std::string line)
 		else if (line.at(i) == ')' && wordIndex == 3)
 		{
 			year = line.substr(1, i-1);
-			std::cout << year << std::endl;
+			//std::cout << year << std::endl;
 
 			wordIndex++;
 			i = 0;
 
-			words.push_back(year);
+			words[2] = year;
 		}	
 	}
 	return words;
+}
+
+void Parser::makeYearMap(std::shared_ptr<std::unordered_map<std::string, std::vector<std::string>>> map, std::vector<std::string> movie) {
+	if (map->find(movie[2]) == map->end()) {
+		std::vector<std::string> movies{};
+		movies.push_back(movie[0] + movie[1]);
+
+	}
 }

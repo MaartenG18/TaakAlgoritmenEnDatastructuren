@@ -44,12 +44,17 @@ void UI::printResults(std::shared_ptr<std::vector<std::string>> results)
 			if (results->at(i).at(j) == '_')	// Search for Firstname Lastname
 			{
 				std::string id = results->at(i).substr(j + 1, results->at(i).length() - (j + 1));
-				std::cout << results->at(i).substr(0, j) << " (" << id << ")" << std::endl;
+				std::cout << "(" << id << "): " << results->at(i).substr(0, j) << std::endl;
 			}
 			if (results->at(i).at(j) == '$')	// Search for Lastname Firstname
 			{
 				std::string id = results->at(i).substr(j + 1, results->at(i).length() - (j + 1));
-				std::cout << results->at(i).substr(0, j) << " (" << id << ")" << std::endl;
+				std::cout << "(" << id << "): " << results->at(i).substr(0, j) << std::endl;
+			}
+			if (results->at(i).at(j) == 'µ')	// Search for Movies
+			{
+				std::string id = results->at(i).substr(j + 1, results->at(i).length() - (j + 1));
+				std::cout << "(" << id << "): " << results->at(i).substr(0, j) << std::endl;
 			}
 		}
 	}

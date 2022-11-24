@@ -22,8 +22,11 @@ void SearchEngine::start()
 	Parser* parser = new Parser();
 	setParser(parser);
 
+	auto map = std::make_shared<std::unordered_map<std::string, std::vector<std::string>>>();
+	setMovieMap(map);
+
 	getParser()->readActors(trie, "actorsKort.txt");
-	//getParser()->readMovies(trie, "moviesKort.txt");
+	getParser()->readMovies(trie, "moviesKort.txt", getMovieMap());
 
 	while (true)
 	{
@@ -101,4 +104,9 @@ Trie* SearchEngine::getTrie() const
 Parser* SearchEngine::getParser() const
 {
 	return m_parser;
+}
+
+std::shared_ptr<std::unordered_map<std::string, std::vector<std::string>>> SearchEngine::getMovieMap()
+{
+	return m_movieMap;
 }
