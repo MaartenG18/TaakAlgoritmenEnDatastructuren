@@ -1,3 +1,7 @@
+// Maarten Gielkens
+// Simon Knuts
+// Yara Mijnendonckx
+
 #pragma once
 
 #include <unordered_map>

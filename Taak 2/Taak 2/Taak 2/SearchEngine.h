@@ -1,7 +1,9 @@
+// Maarten Gielkens
+// Simon Knuts
+// Yara Mijnendonckx
+
 #pragma once
 
-#include <string>
-#include <unordered_map>
 #include "Parser.h"
 #include "Trie.h"
 #include "UI.h"

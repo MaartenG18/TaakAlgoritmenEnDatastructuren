@@ -1,5 +1,8 @@
+// Maarten Gielkens
+// Simon Knuts
+// Yara Mijnendonckx
+
 #include "SearchEngine.h"
-#include <iostream>
 
 
 // ----- Constructors -----
@@ -26,8 +29,8 @@ void SearchEngine::start()
 	auto map = std::make_shared<std::unordered_map<std::string, std::vector<std::string>>>();
 	setMovieMap(map);
 
-	getParser()->readActors(trie, "actorsKort.txt");
-	getParser()->readMovies(trie, "moviesKort.txt", getMovieMap());
+	getParser()->readActors(trie, "actors100K.txt");
+	getParser()->readMovies(trie, "movies100K.txt", getMovieMap());
 
 	while (true)
 	{
@@ -58,7 +61,7 @@ void SearchEngine::processInput(std::string input)
 		input.pop_back();
 		auto results = getTrie()->searchAndAutoComplete(input);
 
-		if (results->size() == 0)
+		if (results->empty())
 		{
 			getUi()->printError(UI::ErrorType::wordNotFound);
 		}
@@ -72,7 +75,7 @@ void SearchEngine::processInput(std::string input)
 		if (results->empty())
 		{
 			getUi()->printError(UI::ErrorType::wordNotFound);
-			getUi()->askInput(getTrie());
+			//getUi()->askInput(getTrie());
 		}
 
 		getUi()->printResults(results);

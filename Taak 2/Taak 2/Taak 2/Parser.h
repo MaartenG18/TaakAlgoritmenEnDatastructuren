@@ -1,8 +1,11 @@
+// Maarten Gielkens
+// Simon Knuts
+// Yara Mijnendonckx
+
 #pragma once
 
 #include "Trie.h"
-#include <string>
-#include <vector>
+#include <fstream>
 
 class Parser
 {

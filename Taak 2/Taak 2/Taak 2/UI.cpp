@@ -1,6 +1,8 @@
+// Maarten Gielkens
+// Simon Knuts
+// Yara Mijnendonckx
+
 #include "UI.h"
-#include <string>
-#include <iostream>
 
 
 // ----- Constructors -----
@@ -12,7 +14,6 @@ UI::UI()
 
 
 // ----- Methods -----
-
 
 std::string UI::askInput(Trie* trie)
 {
@@ -60,7 +61,8 @@ void UI::printResults(std::shared_ptr<std::vector<std::string>> results)
 	}
 }
 
-void UI::printFilmsFromYear(std::vector<std::string> filmList) {
+void UI::printFilmsFromYear(std::vector<std::string> filmList)
+{
 	for (int i = 0; i < filmList.size(); i++) {
 		std::cout << filmList[i] << std::endl;
 	}

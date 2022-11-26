@@ -1,5 +1,8 @@
+// Maarten Gielkens
+// Simon Knuts
+// Yara Mijnendonckx
+
 #include "Trie.h"
-#include <string>
 
 
 // ----- Constructors -----
@@ -8,6 +11,7 @@ Trie::Trie()
 {
 	setRoot(nullptr);
 }
+
 
 // ----- Methods -----
 
@@ -67,7 +71,7 @@ std::shared_ptr<std::vector<std::string>> Trie::searchAndAutoComplete(std::strin
 
 	std::string word{};
 
-	// Laatste van de searchAndAutoComplete string bereikt
+	// Einde van de searchAndAutoComplete string bereikt
 	collectAllWords(temp, str, word, results);
 	return results;
 }

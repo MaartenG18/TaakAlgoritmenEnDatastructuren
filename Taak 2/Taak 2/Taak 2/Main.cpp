@@ -1,5 +1,7 @@
-#include "Parser.h"
-#include "UI.h"
+// Maarten Gielkens
+// Simon Knuts
+// Yara Mijnendonckx
+
 #include "SearchEngine.h"
 
 int main()

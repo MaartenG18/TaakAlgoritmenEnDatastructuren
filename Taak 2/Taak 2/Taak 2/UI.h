@@ -1,8 +1,11 @@
+// Maarten Gielkens
+// Simon Knuts
+// Yara Mijnendonckx
+
 #pragma once
 
 #include "Trie.h"
-#include <string>
-#include <unordered_map>
+#include <iostream>
 
 class UI
 {
