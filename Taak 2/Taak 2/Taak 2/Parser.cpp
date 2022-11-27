@@ -15,7 +15,7 @@ Parser::Parser()
 
 // ----- Methods ------
 
-void Parser::readActors(Trie* trie, std::string fileName)
+void Parser::readActors(Trie* trie, std::string fileName) // Method to read the file with actors and to insert them into the trie
 {
 	std::string line;
 
@@ -32,7 +32,7 @@ void Parser::readActors(Trie* trie, std::string fileName)
 	file.close();
 }
 
-void Parser::readMovies(Trie* trie, std::string fileName, std::shared_ptr<std::unordered_map<std::string, std::vector<std::string>>> map)
+void Parser::readMovies(Trie* trie, std::string fileName, std::shared_ptr<std::unordered_map<std::string, std::vector<std::string>>> map) // Method to read the file with movies and to insert them into the trie. If there is a year given for a movie it stores that movie in the hasmap to use for searching on year.
 {
 	std::string line;
 
@@ -49,7 +49,7 @@ void Parser::readMovies(Trie* trie, std::string fileName, std::shared_ptr<std::u
 	file.close();
 }
 
-std::vector<std::string> Parser::splitLineActor(std::string line)
+std::vector<std::string> Parser::splitLineActor(std::string line) // Method that splits the line in the necessary parts needed for storing them into a trie.
 {
 	std::string id{};
 	std::string lastName{};
@@ -93,7 +93,7 @@ std::vector<std::string> Parser::splitLineActor(std::string line)
 	return words;
 }
 
-std::vector<std::string> Parser::splitLineMovie(std::string line)
+std::vector<std::string> Parser::splitLineMovie(std::string line) // Method that splits the line in the necessary parts needed for storing them into a trie.
 {
 	std::string id{};
 	std::string name{};
@@ -144,7 +144,7 @@ std::vector<std::string> Parser::splitLineMovie(std::string line)
 	return words;
 }
 
-void Parser::makeYearMap(std::shared_ptr<std::unordered_map<std::string, std::vector<std::string>>> map, std::vector<std::string> movie)
+void Parser::makeYearMap(std::shared_ptr<std::unordered_map<std::string, std::vector<std::string>>> map, std::vector<std::string> movie) // Method that stores the movies with a year in the movie hashmap
 {
 	if (map->find(movie[2]) == map->end())
 	{

@@ -14,10 +14,10 @@ public:
 		wordNotFound
 	};
 
-	UI();
+	UI(); // UI constructor
 
-	std::string askInput(Trie* trie);
-	void printError(ErrorType errorType);
-	void printResults(std::shared_ptr<std::vector<std::string>> results);
-	void printFilmsFromYear(std::vector<std::string> FilmList);
+	std::string askInput(Trie* trie); // Method to ask the input question
+	void printError(ErrorType errorType); // Method to print an error
+	void printResults(std::shared_ptr<std::vector<std::string>> results); // Method to print all the results
+	void printFilmsFromYear(std::vector<std::string> FilmList); // Method to print all the movies from a given input
 };

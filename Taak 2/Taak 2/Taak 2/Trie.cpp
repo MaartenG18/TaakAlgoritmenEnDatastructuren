@@ -15,13 +15,13 @@ Trie::Trie()
 
 // ----- Methods -----
 
-Node* Trie::makeNewNode()
+Node* Trie::makeNewNode() // Method to make a new node
 {
 	Node* node = new Node(false);
 	return node;
 }
 
-void Trie::insert(std::string str)
+void Trie::insert(std::string str) // Method that handles the insert part of a string in the trie
 {
 	if (getRoot() == nullptr)
 	{
@@ -45,7 +45,7 @@ void Trie::insert(std::string str)
 	temp->setEndOfWord(true);
 }
 
-std::shared_ptr<std::vector<std::string>> Trie::searchAndAutoComplete(std::string str)
+std::shared_ptr<std::vector<std::string>> Trie::searchAndAutoComplete(std::string str) // Method that searches the trie.
 {
 	auto results = std::make_shared<std::vector<std::string>>();
 
@@ -76,7 +76,7 @@ std::shared_ptr<std::vector<std::string>> Trie::searchAndAutoComplete(std::strin
 	return results;
 }
 
-void Trie::collectAllWords(Node* node, std::string prefix, std::string word, std::shared_ptr<std::vector<std::string>> words)
+void Trie::collectAllWords(Node* node, std::string prefix, std::string word, std::shared_ptr<std::vector<std::string>> words) // Method that collects all the possible word endings for a search input
 {
 	Node* temp = node;
 

@@ -7,6 +7,9 @@
 
 // ----- Constructors -----
 
+/*
+	Each node has a hashmap where the key is a letter or number and a the value is a pointer to the next node in the trie.
+*/
 Node::Node(bool endOfWord) : m_endOfWord{ endOfWord }
 {
 	auto map = std::make_shared<std::unordered_map<char, Node*>>();

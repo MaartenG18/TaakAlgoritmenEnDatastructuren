@@ -21,7 +21,7 @@ private:
 	Trie* m_trie{};
 	Parser* m_parser{};
 
-	void processInput(std::string input);
+	void processInput(std::string input); // Method to process the input
 
 	void setUi(UI* ui); // Setter
 	void setTrie(Trie* trie); // Setter

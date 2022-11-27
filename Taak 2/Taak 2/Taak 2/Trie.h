@@ -18,8 +18,8 @@ public:
 private:
 	Node* m_root{};
 
-	Node* makeNewNode();
-	void collectAllWords(Node* node, std::string prefix, std::string word, std::shared_ptr<std::vector<std::string>> words);
+	Node* makeNewNode(); // Method to make a new node
+	void collectAllWords(Node* node, std::string prefix, std::string word, std::shared_ptr<std::vector<std::string>> words); // Method that finds all the possible words for a search input
 
 	void setRoot(Node* root); // Setter
 

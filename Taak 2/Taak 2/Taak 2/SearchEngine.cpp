@@ -41,12 +41,16 @@ void SearchEngine::start()
 		}
 		else
 		{
+			//TODO trie opruimen door nodes te deleten
+			delete ui;
+			delete parser;
+			delete trie;
 			return;
 		}
 	}
 }
 
-void SearchEngine::processInput(std::string input)
+void SearchEngine::processInput(std::string input) // Method that processes the input
 {
 	if (input.size() == 4 && (input[0] == '1' || input[0] == '2')) {
 		if (getMovieMap()->find(input) == getMovieMap()->end()) {
