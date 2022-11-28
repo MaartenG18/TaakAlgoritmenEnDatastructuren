@@ -15,9 +15,9 @@ Trie::Trie()
 
 // ----- Methods -----
 
-Node* Trie::makeNewNode() // Method to make a new node
+std::shared_ptr<Node> Trie::makeNewNode() // Method to make a new node
 {
-	Node* node = new Node(false);
+	auto node = std::make_shared<Node>(false);
 	return node;
 }
 
@@ -28,14 +28,14 @@ void Trie::insert(std::string str) // Method that handles the insert part of a s
 		setRoot(makeNewNode());
 	}
 
-	Node* temp = getRoot();
+	std::shared_ptr<Node> temp = getRoot();
 
 	for (int i = 0; i < str.length(); i++) 
 	{
 		char x = str[i];
 		if (temp->getMap()->find(x) == temp->getMap()->end())
 		{
-			std::pair<char, Node*> pair{ x, makeNewNode() };
+			std::pair<char, std::shared_ptr<Node>> pair{ x, makeNewNode() };
 			temp->getMap()->insert(pair);
 		}
 
@@ -54,7 +54,7 @@ std::shared_ptr<std::vector<std::string>> Trie::searchAndAutoComplete(std::strin
 		return results;
 	}
 
-	Node* temp = getRoot();
+	std::shared_ptr<Node> temp = getRoot();
 
 	for (int i = 0; i < str.length(); i++) 
 	{
@@ -76,9 +76,9 @@ std::shared_ptr<std::vector<std::string>> Trie::searchAndAutoComplete(std::strin
 	return results;
 }
 
-void Trie::collectAllWords(Node* node, std::string prefix, std::string word, std::shared_ptr<std::vector<std::string>> words) // Method that collects all the possible word endings for a search input
+void Trie::collectAllWords(std::shared_ptr<Node> node, std::string prefix, std::string word, std::shared_ptr<std::vector<std::string>> words) // Method that collects all the possible word endings for a search input
 {
-	Node* temp = node;
+	std::shared_ptr<Node> temp = node;
 
 	for (auto i = temp->getMap()->begin(); i != temp->getMap()->end(); i++)
 	{
@@ -103,7 +103,7 @@ void Trie::collectAllWords(Node* node, std::string prefix, std::string word, std
 
 // ----- Setters -----
 
-void Trie::setRoot(Node* root)
+void Trie::setRoot(std::shared_ptr<Node> root)
 {
 	m_root = root;
 }
@@ -111,7 +111,7 @@ void Trie::setRoot(Node* root)
 
 // ----- Getters -----
 
-Node* Trie::getRoot() const
+std::shared_ptr<Node> Trie::getRoot() const
 {
 	return m_root;
 }

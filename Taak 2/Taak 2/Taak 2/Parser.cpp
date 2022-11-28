@@ -15,7 +15,7 @@ Parser::Parser()
 
 // ----- Methods ------
 
-void Parser::readActors(Trie* trie, std::string fileName) // Method to read the file with actors and to insert them into the trie
+void Parser::readActors(std::shared_ptr<Trie> trie, std::string fileName) // Method to read the file with actors and to insert them into the trie
 {
 	std::string line;
 
@@ -32,7 +32,7 @@ void Parser::readActors(Trie* trie, std::string fileName) // Method to read the 
 	file.close();
 }
 
-void Parser::readMovies(Trie* trie, std::string fileName, std::shared_ptr<std::unordered_map<std::string, std::vector<std::string>>> map) // Method to read the file with movies and to insert them into the trie. If there is a year given for a movie it stores that movie in the hasmap to use for searching on year.
+void Parser::readMovies(std::shared_ptr<Trie> trie, std::string fileName, std::shared_ptr<std::unordered_map<std::string, std::vector<std::string>>> map) // Method to read the file with movies and to insert them into the trie. If there is a year given for a movie it stores that movie in the hasmap to use for searching on year.
 {
 	std::string line;
 

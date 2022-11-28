@@ -15,7 +15,7 @@ UI::UI()
 
 // ----- Methods -----
 
-std::string UI::askInput(Trie* trie) // Method to ask the input question and return the given input.
+std::string UI::askInput() // Method to ask the input question and return the given input.
 {
 	std::string input;
 	std::cout << "Enter search string, end in a '#' for suggestions. q to quit" << std::endl;

@@ -17,13 +17,13 @@ SearchEngine::SearchEngine()
 
 void SearchEngine::start()
 {
-	UI* ui = new UI();
+	auto ui = std::make_shared<UI>();
 	setUi(ui);
 
-	Trie* trie = new Trie();
+	auto trie = std::make_shared<Trie>();
 	setTrie(trie);
 
-	Parser* parser = new Parser();
+	auto parser = std::make_shared<Parser>();
 	setParser(parser);
 
 	auto map = std::make_shared<std::unordered_map<std::string, std::vector<std::string>>>();
@@ -34,17 +34,13 @@ void SearchEngine::start()
 
 	while (true)
 	{
-		std::string input = ui->askInput(trie);
+		std::string input = ui->askInput();
 		if (input != "q")
 		{
 			processInput(input);
 		}
 		else
 		{
-			//TODO trie opruimen door nodes te deleten
-			delete ui;
-			delete parser;
-			delete trie;
 			return;
 		}
 	}
@@ -89,17 +85,17 @@ void SearchEngine::processInput(std::string input) // Method that processes the 
 
 // ----- Setters -----
 
-void SearchEngine::setUi(UI* ui)
+void SearchEngine::setUi(std::shared_ptr<UI> ui)
 {
 	m_ui = ui;
 }
 
-void SearchEngine::setTrie(Trie* trie)
+void SearchEngine::setTrie(std::shared_ptr<Trie> trie)
 {
 	m_trie = trie;
 }
 
-void SearchEngine::setParser(Parser* parser)
+void SearchEngine::setParser(std::shared_ptr<Parser> parser)
 {
 	m_parser = parser;
 }
@@ -111,17 +107,17 @@ void SearchEngine::setMovieMap(std::shared_ptr<std::unordered_map<std::string, s
 
 // ----- Getters -----
 
-UI* SearchEngine::getUi() const
+std::shared_ptr<UI> SearchEngine::getUi() const
 {
 	return m_ui;
 }
 
-Trie* SearchEngine::getTrie() const
+std::shared_ptr<Trie> SearchEngine::getTrie() const
 {
 	return m_trie;
 }
 
-Parser* SearchEngine::getParser() const
+std::shared_ptr<Parser> SearchEngine::getParser() const
 {
 	return m_parser;
 }

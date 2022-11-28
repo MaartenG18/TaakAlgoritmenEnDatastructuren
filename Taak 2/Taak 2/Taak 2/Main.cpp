@@ -9,5 +9,6 @@ int main()
 	SearchEngine* searchEngine = new SearchEngine();
 	searchEngine->start();
 
+	delete searchEngine;
 	return 0;
 }

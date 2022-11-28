@@ -17,19 +17,19 @@ public:
 
 private:
 	std::shared_ptr<std::unordered_map<std::string, std::vector<std::string>>> m_movieMap{};
-	UI* m_ui{};
-	Trie* m_trie{};
-	Parser* m_parser{};
+	std::shared_ptr<UI> m_ui{};
+	std::shared_ptr<Trie> m_trie{};
+	std::shared_ptr<Parser> m_parser{};
 
 	void processInput(std::string input); // Method to process the input
 
-	void setUi(UI* ui); // Setter
-	void setTrie(Trie* trie); // Setter
-	void setParser(Parser* parser); // Setter
+	void setUi(std::shared_ptr<UI> ui); // Setter
+	void setTrie(std::shared_ptr<Trie> trie); // Setter
+	void setParser(std::shared_ptr<Parser> parser); // Setter
 	void setMovieMap(std::shared_ptr<std::unordered_map<std::string, std::vector<std::string>>> map); // Setter
 
-	UI* getUi() const; // Getter
-	Trie* getTrie() const; // Getter
-	Parser* getParser() const; // Getter
+	std::shared_ptr<UI> getUi() const; // Getter
+	std::shared_ptr<Trie> getTrie() const; // Getter
+	std::shared_ptr<Parser> getParser() const; // Getter
 	std::shared_ptr<std::unordered_map<std::string, std::vector<std::string>>> getMovieMap(); // Getter
 };
