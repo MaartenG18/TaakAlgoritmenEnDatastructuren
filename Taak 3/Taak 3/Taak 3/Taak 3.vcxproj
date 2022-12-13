@@ -127,7 +127,22 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <Text Include="C:\Users\Maarten\Downloads\Messages.txt" />
+    <ClCompile Include="Graph.cpp" />
+    <ClCompile Include="Io.cpp" />
+    <ClCompile Include="Main.cpp" />
+    <ClCompile Include="MessageSender.cpp" />
+    <ClCompile Include="Parser.cpp" />
+    <ClCompile Include="Vertex.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Graph.h" />
+    <ClInclude Include="Io.h" />
+    <ClInclude Include="MessageSender.h" />
+    <ClInclude Include="Parser.h" />
+    <ClInclude Include="Vertex.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Messages.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
