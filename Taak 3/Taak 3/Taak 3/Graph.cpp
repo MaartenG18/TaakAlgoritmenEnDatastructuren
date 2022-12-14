@@ -6,7 +6,7 @@
 
 Graph::Graph()
 {
-	std::vector<std::shared_ptr<Vertex>>* vertices = new std::vector<std::shared_ptr<Vertex>>;
+	auto vertices = std::make_shared<std::vector<std::shared_ptr<Vertex>>>();
 	setVertices(vertices);
 }
 
@@ -68,7 +68,7 @@ void Graph::makeGraph(std::shared_ptr<std::vector<std::string>> vertices, std::s
 
 // ----- Setters -----
 
-void Graph::setVertices(std::vector<std::shared_ptr<Vertex>>* vertices)
+void Graph::setVertices(std::shared_ptr<std::vector<std::shared_ptr<Vertex>>> vertices)
 {
 	m_vertices = vertices;
 }
@@ -76,7 +76,7 @@ void Graph::setVertices(std::vector<std::shared_ptr<Vertex>>* vertices)
 
 // ----- Getters -----
 
-std::vector<std::shared_ptr<Vertex>>* Graph::getVertices()
+std::shared_ptr<std::vector<std::shared_ptr<Vertex>>> Graph::getVertices()
 {
 	return m_vertices;
 }

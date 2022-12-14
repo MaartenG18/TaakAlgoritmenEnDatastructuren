@@ -15,11 +15,11 @@ public:
 	void makeGraph(std::shared_ptr<std::vector<std::string>> vertices, std::shared_ptr<std::vector<std::pair<std::string, std::string>>> edges);
 
 private:
-	std::vector<std::shared_ptr<Vertex>>* m_vertices;
+	std::shared_ptr<std::vector<std::shared_ptr<Vertex>>> m_vertices;
 	std::vector<std::vector<int>> m_adjacencyMatrix;
 
-	void setVertices(std::vector<std::shared_ptr<Vertex>>* vertices);
+	void setVertices(std::shared_ptr<std::vector<std::shared_ptr<Vertex>>> vertices);
 
-	std::vector<std::shared_ptr<Vertex>>* getVertices(); // Getter
+	std::shared_ptr<std::vector<std::shared_ptr<Vertex>>> getVertices(); // Getter
 	std::vector<std::vector<int>> getAdjacencyMatrix() const; // Getter
 };
