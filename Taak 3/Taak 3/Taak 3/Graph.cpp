@@ -6,7 +6,8 @@
 
 Graph::Graph()
 {
-
+	std::vector<std::shared_ptr<Vertex>>* vertices = new std::vector<std::shared_ptr<Vertex>>;
+	setVertices(vertices);
 }
 
 
@@ -16,8 +17,8 @@ void Graph::addVertex(std::string message)
 {
 	auto vertex = std::make_shared<Vertex>(message);
 	//dit werkt nie 
-	getVertices().push_back(vertex);
-	getAdjacencyMatrix().push_back(std::vector<int>(getVertices().size(), 0));
+	getVertices()->push_back(vertex);
+	getAdjacencyMatrix().push_back(std::vector<int>(getVertices()->size(), 0));
 }
 
 void Graph::addEdge(int i, int j)
@@ -65,11 +66,17 @@ void Graph::makeGraph(std::shared_ptr<std::vector<std::string>> vertices, std::s
 	
 }
 
+// ----- Setters -----
+
+void Graph::setVertices(std::vector<std::shared_ptr<Vertex>>* vertices)
+{
+	m_vertices = vertices;
+}
 
 
 // ----- Getters -----
 
-std::vector<std::shared_ptr<Vertex>> Graph::getVertices()
+std::vector<std::shared_ptr<Vertex>>* Graph::getVertices()
 {
 	return m_vertices;
 }
