@@ -27,7 +27,7 @@ void SearchEngine::start()
 	setMovieMap(map);
 
 	getParser()->readActors(trie, "actorsKort.txt");
-	getParser()->readMovies(trie, "moviesKort.txt", getMovieMap());
+	getParser()->readMovies(trie, "movies100K.txt", getMovieMap());
 
 	while (true)
 	{
