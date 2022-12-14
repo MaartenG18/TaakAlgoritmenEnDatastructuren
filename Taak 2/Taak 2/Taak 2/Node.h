@@ -1,3 +1,7 @@
+// Maarten Gielkens
+// Simon Knuts
+// Yara Mijnendonckx
+
 #pragma once
 
 #include <unordered_map>
@@ -11,11 +15,11 @@ public:
 	void setEndOfWord(bool endOfWord); // Setter
 
 	bool getEndOfWord() const; // Getter
-	std::shared_ptr<std::unordered_map<char, Node*>> getMap(); // Getter
+	std::shared_ptr<std::unordered_map<char, std::shared_ptr<Node>>> getMap(); // Getter
 
 private:
 	bool m_endOfWord{};
-	std::shared_ptr<std::unordered_map<char, Node*>> m_map{};
+	std::shared_ptr<std::unordered_map<char, std::shared_ptr<Node>>> m_map{};
 
-	void setMap(std::shared_ptr<std::unordered_map<char, Node*>> map); // Setter
+	void setMap(std::shared_ptr<std::unordered_map<char, std::shared_ptr<Node>>> map); // Setter
 };

@@ -1,5 +1,8 @@
+// Maarten Gielkens
+// Simon Knuts
+// Yara Mijnendonckx
+
 #include "Trie.h"
-#include <string>
 
 
 // ----- Constructors -----
@@ -9,29 +12,30 @@ Trie::Trie()
 	setRoot(nullptr);
 }
 
+
 // ----- Methods -----
 
-Node* Trie::makeNewNode()
+std::shared_ptr<Node> Trie::makeNewNode() // Method to make a new node
 {
-	Node* node = new Node(false);
+	auto node = std::make_shared<Node>(false);
 	return node;
 }
 
-void Trie::insert(std::string str)
+void Trie::insert(std::string str) // Method that handles the insert part of a string in the trie
 {
 	if (getRoot() == nullptr)
 	{
 		setRoot(makeNewNode());
 	}
 
-	Node* temp = getRoot();
+	std::shared_ptr<Node> temp = getRoot();
 
 	for (int i = 0; i < str.length(); i++) 
 	{
 		char x = str[i];
 		if (temp->getMap()->find(x) == temp->getMap()->end())
 		{
-			std::pair<char, Node*> pair{ x, makeNewNode() };
+			std::pair<char, std::shared_ptr<Node>> pair{ x, makeNewNode() };
 			temp->getMap()->insert(pair);
 		}
 
@@ -41,7 +45,7 @@ void Trie::insert(std::string str)
 	temp->setEndOfWord(true);
 }
 
-std::shared_ptr<std::vector<std::string>> Trie::searchAndAutoComplete(std::string str)
+std::shared_ptr<std::vector<std::string>> Trie::searchAndAutoComplete(std::string str) // Method that searches the trie.
 {
 	auto results = std::make_shared<std::vector<std::string>>();
 
@@ -50,7 +54,7 @@ std::shared_ptr<std::vector<std::string>> Trie::searchAndAutoComplete(std::strin
 		return results;
 	}
 
-	Node* temp = getRoot();
+	std::shared_ptr<Node> temp = getRoot();
 
 	for (int i = 0; i < str.length(); i++) 
 	{
@@ -67,14 +71,14 @@ std::shared_ptr<std::vector<std::string>> Trie::searchAndAutoComplete(std::strin
 
 	std::string word{};
 
-	// Laatste van de searchAndAutoComplete string bereikt
+	// Einde van de searchAndAutoComplete string bereikt
 	collectAllWords(temp, str, word, results);
 	return results;
 }
 
-void Trie::collectAllWords(Node* node, std::string prefix, std::string word, std::shared_ptr<std::vector<std::string>> words)
+void Trie::collectAllWords(std::shared_ptr<Node> node, std::string prefix, std::string word, std::shared_ptr<std::vector<std::string>> words) // Method that collects all the possible word endings for a search input
 {
-	Node* temp = node;
+	std::shared_ptr<Node> temp = node;
 
 	for (auto i = temp->getMap()->begin(); i != temp->getMap()->end(); i++)
 	{
@@ -99,7 +103,7 @@ void Trie::collectAllWords(Node* node, std::string prefix, std::string word, std
 
 // ----- Setters -----
 
-void Trie::setRoot(Node* root)
+void Trie::setRoot(std::shared_ptr<Node> root)
 {
 	m_root = root;
 }
@@ -107,7 +111,7 @@ void Trie::setRoot(Node* root)
 
 // ----- Getters -----
 
-Node* Trie::getRoot() const
+std::shared_ptr<Node> Trie::getRoot() const
 {
 	return m_root;
 }

@@ -1,6 +1,8 @@
+// Maarten Gielkens
+// Simon Knuts
+// Yara Mijnendonckx
+
 #include "UI.h"
-#include <string>
-#include <iostream>
 
 
 // ----- Constructors -----
@@ -13,8 +15,7 @@ UI::UI()
 
 // ----- Methods -----
 
-
-std::string UI::askInput(Trie* trie)
+std::string UI::askInput() // Method to ask the input question and return the given input.
 {
 	std::string input;
 	std::cout << "Enter search string, end in a '#' for suggestions. q to quit" << std::endl;
@@ -23,7 +24,7 @@ std::string UI::askInput(Trie* trie)
 	return input;
 }
 
-void UI::printError(ErrorType errorType)
+void UI::printError(ErrorType errorType) // Method to print an error
 {
 	switch (errorType)
 	{
@@ -35,7 +36,7 @@ void UI::printError(ErrorType errorType)
 	}
 }
 
-void UI::printResults(std::shared_ptr<std::vector<std::string>> results)
+void UI::printResults(std::shared_ptr<std::vector<std::string>> results) // Method to print all the results
 {
 	for (int i = 0; i < results->size(); i++)
 	{
@@ -60,7 +61,8 @@ void UI::printResults(std::shared_ptr<std::vector<std::string>> results)
 	}
 }
 
-void UI::printFilmsFromYear(std::vector<std::string> filmList) {
+void UI::printFilmsFromYear(std::vector<std::string> filmList) // Method to print the results if the search input is a year.
+{
 	for (int i = 0; i < filmList.size(); i++) {
 		std::cout << filmList[i] << std::endl;
 	}

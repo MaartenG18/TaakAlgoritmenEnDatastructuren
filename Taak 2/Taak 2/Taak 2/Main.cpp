@@ -1,5 +1,7 @@
-#include "Parser.h"
-#include "UI.h"
+// Maarten Gielkens
+// Simon Knuts
+// Yara Mijnendonckx
+
 #include "SearchEngine.h"
 
 int main()
@@ -7,5 +9,6 @@ int main()
 	SearchEngine* searchEngine = new SearchEngine();
 	searchEngine->start();
 
+	delete searchEngine;
 	return 0;
 }
