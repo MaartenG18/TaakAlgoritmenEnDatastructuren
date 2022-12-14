@@ -15,6 +15,7 @@ Graph::Graph()
 void Graph::addVertex(std::string message)
 {
 	auto vertex = std::make_shared<Vertex>(message);
+	//dit werkt nie 
 	getVertices().push_back(vertex);
 	getAdjacencyMatrix().push_back(std::vector<int>(getVertices().size(), 0));
 }
@@ -52,7 +53,7 @@ void Graph::makeGraph(std::shared_ptr<std::vector<std::string>> vertices, std::s
 		std::cout << x.first << ": " << x.second << std::endl;
 	}
 
-	/* 
+	
 	for (const auto& edge : *edges)
 	{
 		int i = indexMap.at(edge.first);
@@ -61,7 +62,7 @@ void Graph::makeGraph(std::shared_ptr<std::vector<std::string>> vertices, std::s
 		// deze regel crasht omdat de size van de adjacency matrix nergens bepaald is volgens mij
 		graph.addEdge(i, j);
 	}
-	*/
+	
 }
 
 
