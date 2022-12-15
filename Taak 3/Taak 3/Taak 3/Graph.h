@@ -13,13 +13,16 @@ public:
 	void addEdge(int i, int j); // Method to add an edge between two vertices
 	void removeEdge(int i, int j); // Method to remove an edge between two vertices
 	void makeGraph(std::shared_ptr<std::vector<std::string>> vertices, std::shared_ptr<std::vector<std::pair<std::string, std::string>>> edges);
+	void changeGraphToComplement();
+	void visualizeGraph();
 
 private:
 	std::shared_ptr<std::vector<std::shared_ptr<Vertex>>> m_vertices;
-	std::vector<std::vector<int>> m_adjacencyMatrix;
+	std::shared_ptr<std::vector<std::vector<int>>> m_adjacencyMatrix;
 
 	void setVertices(std::shared_ptr<std::vector<std::shared_ptr<Vertex>>> vertices);
+	void setAdjacencyMatrix(std::shared_ptr<std::vector<std::vector<int>>> adjacencyMatrix);
 
 	std::shared_ptr<std::vector<std::shared_ptr<Vertex>>> getVertices(); // Getter
-	std::vector<std::vector<int>> getAdjacencyMatrix() const; // Getter
+	std::shared_ptr<std::vector<std::vector<int>>> getAdjacencyMatrix() const; // Getter
 };
