@@ -1,6 +1,6 @@
 #include "Graph.h"
 #include <unordered_map>
-#include <iostream> // niet vergeten weg te doen
+#include <iostream>
 
 // ----- Constructors -----
 
@@ -18,7 +18,6 @@ Graph::Graph()
 void Graph::addVertex(std::string message)
 {
 	auto vertex = std::make_shared<Vertex>(message);
-	//dit werkt nie 
 	getVertices()->push_back(vertex);
 }
 
@@ -36,47 +35,40 @@ void Graph::removeEdge(int i, int j)
 
 void Graph::makeGraph(std::shared_ptr<std::vector<std::string>> vertices, std::shared_ptr<std::vector<std::pair<std::string, std::string>>> edges)
 {
-	// we kunnen de functies van addEdge en removeEdge ook ineens omkeren (de true en false)
-	// dan hebben we direct de complement graaf
-
 	std::unordered_map<std::string, int> indexMap;
-	int index = 0;
+	
 
-	for (const auto& vertex : *vertices)
+	for (int index = 0; index < vertices->size(); index++)
 	{
-		addVertex(vertex);
-		indexMap[vertex] = index;
-		index++;
+		addVertex(vertices->at(index));
+		indexMap[vertices->at(index)] = index;
 	}
-	for (int k = 0; k < index; k++) {
-		getAdjacencyMatrix()->push_back(std::vector<int>(index, 0));
+
+	for (int k = 0; k < vertices->size(); k++)
+	{
+		getAdjacencyMatrix()->push_back(std::vector<int>(vertices->size(), 0));
 	}
-	// om de map te testen
-	for (auto& x : indexMap) {
-		std::cout << x.first << ": " << x.second << std::endl;
-	}
+
 
 	for (const auto& edge : *edges)
 	{
 		int i = indexMap.at(edge.first);
 		int j = indexMap.at(edge.second);
 
-		// deze regel crasht omdat de size van de adjacency matrix nergens bepaald is volgens mij
 		addEdge(i, j);
 	}
-	visualizeGraph();
-	std::cout << getAdjacencyMatrix()->at(2)[1] << std::endl;
+
 	changeGraphToComplement();
-	std::cout << getAdjacencyMatrix()->at(2)[1] << std::endl;
+
+	// om te checken
 	visualizeGraph();
-	
 }
 
 void Graph::changeGraphToComplement()
 {
 	for (int i = 0; i < getAdjacencyMatrix()->size(); i++) {
 		for (int j = 0; j < getAdjacencyMatrix()->size(); j++) {
-			if (i != j) {
+			if (i < j) {
 				if (getAdjacencyMatrix()->at(j)[i] == 0) {
 					addEdge(i, j);
 				}
