@@ -35,6 +35,7 @@ void Graph::removeEdge(int i, int j)
 
 void Graph::makeGraph(std::shared_ptr<std::vector<std::string>> vertices, std::shared_ptr<std::vector<std::pair<std::string, std::string>>> edges)
 {
+	// van 'indexMap' misschien een membervariabele maken om makkelijker de output van graph colouring te kunnen verwerken
 	std::unordered_map<std::string, int> indexMap;
 	setNumberOfVertices(static_cast<int>(vertices->size()));
 	
@@ -79,7 +80,7 @@ void Graph::changeGraphToComplement()
 	}
 }
 
-bool Graph::graphColouringIsSafe(int v, std::shared_ptr<std::vector<std::vector<int>>> graph, std::shared_ptr<std::vector<int>> colours, int c, int numberOfVertices)
+bool Graph::graphColouringIsSafe(int v, std::shared_ptr<std::vector<std::vector<int>>> graph, std::shared_ptr<std::vector<int>> colours, int c, int numberOfVertices)  // [1]
 {
 	for (int i = 0; i < numberOfVertices; i++)
 	{
@@ -91,7 +92,7 @@ bool Graph::graphColouringIsSafe(int v, std::shared_ptr<std::vector<std::vector<
 	return true;
 }
 
-bool Graph::graphColoringUtil(std::shared_ptr<std::vector<std::vector<int>>> graph, int numberOfVertices, std::shared_ptr<std::vector<int>> colours, int v)
+bool Graph::graphColoringUtil(std::shared_ptr<std::vector<std::vector<int>>> graph, int numberOfVertices, std::shared_ptr<std::vector<int>> colours, int v)  // [1]
 {
 	if (v == numberOfVertices)
 	{
@@ -115,7 +116,7 @@ bool Graph::graphColoringUtil(std::shared_ptr<std::vector<std::vector<int>>> gra
 	return false;
 }
 
-void Graph::graphColouring()
+void Graph::graphColouring() // [1]
 {
 	auto colours = std::make_shared<std::vector<int>>(getNumberOfVertices());
 	setColours(colours);
@@ -155,6 +156,7 @@ void Graph::visualizeGraph()
 	}
 	std::cout << " ---------------------------------" << std::endl;
 }
+
 
 // ----- Setters -----
 
@@ -200,3 +202,9 @@ std::shared_ptr<std::vector<int>> Graph::getColours()
 {
 	return m_colours;
 }
+
+/*
+Bronvermelding:
+[1] GeeksforGeeks. (2022, 23 september). m Coloring Problem | Backtracking-5. 
+https://www.geeksforgeeks.org/m-coloring-problem-backtracking-5/
+*/
