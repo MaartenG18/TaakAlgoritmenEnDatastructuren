@@ -23,6 +23,16 @@ void MessageSender::start()
 	//getParser()->readCompatibilities("Messages.txt");
 
 	getGraph()->makeGraph(getParser()->readMessages("Messages.txt"), getParser()->readCompatibilities("Messages.txt"));
+
+	// om te checken
+	getGraph()->visualizeGraph();
+
+	getGraph()->changeGraphToComplement();
+
+	// om te checken
+	getGraph()->visualizeGraph();
+
+	getGraph()->graphColouring(8);
 }
 
 
