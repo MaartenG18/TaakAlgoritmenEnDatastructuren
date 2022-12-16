@@ -8,10 +8,8 @@ Graph::Graph()
 {
 	auto vertices = std::make_shared<std::vector<std::shared_ptr<Vertex>>>();
 	auto adjacencyMatrix = std::make_shared<std::vector<std::vector<int>>>();
-	auto colours = std::shared_ptr<int[]>();
 	setVertices(vertices);
 	setAdjacencyMatrix(adjacencyMatrix);
-	setColours(colours);
 }
 
 
@@ -39,9 +37,6 @@ void Graph::makeGraph(std::shared_ptr<std::vector<std::string>> vertices, std::s
 {
 	std::unordered_map<std::string, int> indexMap;
 	setNumberOfVertices(static_cast<int>(vertices->size()));
-
-	auto colours = std::make_shared<int[]>(getNumberOfVertices(), 0);
-	setColours(colours);
 	
 	for (int index = 0; index < getNumberOfVertices(); index++)
 	{
@@ -84,48 +79,67 @@ void Graph::changeGraphToComplement()
 	}
 }
 
-bool Graph::graphColouringIsSafe(int v, std::shared_ptr<std::vector<std::vector<int>>> graph, std::shared_ptr<int[]> colours, int c, int numberOfVertices)
+bool Graph::graphColouringIsSafe(int v, std::shared_ptr<std::vector<std::vector<int>>> graph, std::shared_ptr<std::vector<int>> colours, int c, int numberOfVertices)
 {
 	for (int i = 0; i < numberOfVertices; i++)
-		if (graph->at(v)[i] && c == colours[i])
+	{
+		if (graph->at(v)[i] && c == colours->at(i))
+		{
 			return false;
-
+		}
+	}
 	return true;
 }
 
-bool Graph::graphColoringUtil(std::shared_ptr<std::vector<std::vector<int>>> graph, int numberOfVertices, std::shared_ptr<int[]> colours, int v)
+bool Graph::graphColoringUtil(std::shared_ptr<std::vector<std::vector<int>>> graph, int numberOfVertices, std::shared_ptr<std::vector<int>> colours, int v)
 {
 	if (v == numberOfVertices)
+	{
 		return true;
+	}
 
 	for (int c = 1; c <= numberOfVertices; c++)
 	{
 		if (graphColouringIsSafe(v, graph, colours, c, numberOfVertices))
 		{
-			colours[v] = c;
+			colours->at(v) = c;
 
 			if (graphColoringUtil(graph, numberOfVertices, colours, v + 1) == true)
+			{
 				return true;
+			}
 
-			colours[v] = 0;
+			colours->at(v) = 0;
 		}
 	}
-
 	return false;
 }
 
-void Graph::graphColouring(int numberOfVertices)
+void Graph::graphColouring()
 {
-	/*for (int i = 0; i < numberOfVertices; i++)
-	{
-		getColours()[i] = 0;
-	}*/
+	auto colours = std::make_shared<std::vector<int>>(getNumberOfVertices());
+	setColours(colours);
 
-	if (graphColoringUtil(getAdjacencyMatrix(), numberOfVertices, getColours(), 0) == true)
+	for (int i = 0; i < getNumberOfVertices(); i++)
 	{
-		std::cout << "done" << std::endl;
-		//printen of doorgeven??
+		getColours()->at(i) = 0;
 	}
+
+	if (graphColoringUtil(getAdjacencyMatrix(), getNumberOfVertices(), getColours(), 0) == true)
+	{
+		//doorgeven van de array met kleuren en op de juiste manier verwerken, dit is maar om te testen
+		printSolution(getColours());
+	}
+}
+
+// om te testen:
+void Graph::printSolution(std::shared_ptr<std::vector<int>> colours)
+{
+	std::cout << "Oplossing:" << std::endl;
+	for (int i = 0; i < getNumberOfVertices(); i++)
+		std::cout << " " << colours->at(i) << " ";
+
+	std::cout << "\n";
 }
 
 void Graph::visualizeGraph()
@@ -159,7 +173,7 @@ void Graph::setAdjacencyMatrix(std::shared_ptr<std::vector<std::vector<int>>> ad
 	m_adjacencyMatrix = adjacencyMatrix;
 }
 
-void Graph::setColours(std::shared_ptr<int[]> colours)
+void Graph::setColours(std::shared_ptr<std::vector<int>> colours)
 {
 	m_colours = colours;
 }
@@ -182,7 +196,7 @@ std::shared_ptr<std::vector<std::vector<int>>> Graph::getAdjacencyMatrix() const
 	return m_adjacencyMatrix;
 }
 
-std::shared_ptr<int[]> Graph::getColours()
+std::shared_ptr<std::vector<int>> Graph::getColours()
 {
 	return m_colours;
 }

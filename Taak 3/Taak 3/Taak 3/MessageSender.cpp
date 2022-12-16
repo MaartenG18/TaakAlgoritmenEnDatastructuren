@@ -32,7 +32,7 @@ void MessageSender::start()
 	// om te checken
 	getGraph()->visualizeGraph();
 
-	getGraph()->graphColouring(8);
+	getGraph()->graphColouring();
 }
 
 
