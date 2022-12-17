@@ -136,10 +136,38 @@ void Graph::graphColouring() // [1]
 // om te testen:
 void Graph::printSolution(std::shared_ptr<std::vector<int>> colours)
 {
-	std::cout << "Oplossing:" << std::endl;
-	for (int i = 0; i < getNumberOfVertices(); i++)
-		std::cout << " " << colours->at(i) << " ";
-
+	std::vector<std::vector<std::string>> oplossing;
+	for (int i = 0; i < colours->size(); i++) {
+		if (oplossing.size() < colours->at(i)) {
+			std::vector<std::string> nieuweKleur;
+			nieuweKleur.push_back(getVertices()->at(i)->getMessage());
+			oplossing.push_back(nieuweKleur);
+		}
+		else {
+			oplossing[colours->at(i)-1].push_back(getVertices()->at(i)->getMessage());
+		}
+	}
+	std::cout << "oplossing:" << std::endl;
+	for (int i = 0; i < getNumberOfVertices(); i++) {
+		std::cout << getVertices()->at(i)->getMessage() << " ";
+	}
+	std::cout << std::endl;
+	for (int i = 0; i < getNumberOfVertices(); i++){
+		std::cout << "   " << colours->at(i) << "   ";
+	}
+	std::cout << std::endl;
+	std::cout << std::endl;
+	std::cout << "de data zal dus worden verstuurd in " << oplossing.size() << " groepen, deze zijn: " << std::endl;
+	for (int i = 0; i < oplossing.size(); i++) {
+		std::cout << "groep " << i + 1 << ": ";
+		for (int j = 0; j < oplossing[i].size(); j++) {
+			std::cout << oplossing[i][j];
+			if (j != oplossing[i].size()-1) {
+				std::cout << ", ";
+			}
+		}
+		std::cout << std::endl;
+	}
 	std::cout << "\n";
 }
 
