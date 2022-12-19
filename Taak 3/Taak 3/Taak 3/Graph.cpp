@@ -136,6 +136,36 @@ bool Graph::graphColouring() // [1]
 	return false;
 }
 
+void Graph::rotateGraph()
+{
+	std::vector<int> row1{};
+	std::vector<int> column1{};
+
+	for (int j = getAdjacencyMatrix()->size() - 1; j >= 0; j--) {
+		row1.push_back(getAdjacencyMatrix()->at(0)[j]);
+	}
+
+	for (int i = getAdjacencyMatrix()->size() - 1; i >= 0 ; i--) {
+		column1.push_back(getAdjacencyMatrix()->at(i)[0]);
+	}
+
+	for (int i = 1; i < getAdjacencyMatrix()->size(); i++) {
+		for (int j = 1; j < getAdjacencyMatrix()->size(); j++) {
+			getAdjacencyMatrix()->at(i-1)[j-1] = getAdjacencyMatrix()->at(i)[j];
+		}
+	}
+
+	for (int j = 0; j < row1.size(); j++) {
+		getAdjacencyMatrix()->at(getAdjacencyMatrix()->size() - 1)[j] = row1[j];
+	}
+
+	for (int i = 0; i < column1.size(); i++) {
+		getAdjacencyMatrix()->at(i)[getAdjacencyMatrix()->size() - 1] = column1[i];
+	}
+
+
+}
+
 
 // ----- Setters -----
 

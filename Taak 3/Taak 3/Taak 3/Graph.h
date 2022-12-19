@@ -12,6 +12,7 @@ public:
 	void makeGraph(std::shared_ptr<std::vector<std::string>> vertices, std::shared_ptr<std::vector<std::pair<std::string, std::string>>> edges);
 	void changeGraphToComplement();
 	bool graphColouring();
+	void rotateGraph();
 	
 	int getNumberOfVertices(); // Getter
 	std::shared_ptr<std::vector<int>> getColours(); // Getter

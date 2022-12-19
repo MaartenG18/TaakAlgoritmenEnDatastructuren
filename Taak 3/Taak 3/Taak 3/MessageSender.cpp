@@ -19,9 +19,6 @@ void MessageSender::start()
 	auto graph = std::make_shared<Graph>();
 	setGraph(graph);
 
-	//getParser()->readMessages("Messages.txt");
-	//getParser()->readCompatibilities("Messages.txt");
-
 	getGraph()->makeGraph(getParser()->readMessages("Messages.txt"), getParser()->readCompatibilities("Messages.txt"));
 
 	// om te checken
@@ -30,12 +27,20 @@ void MessageSender::start()
 	getGraph()->changeGraphToComplement();
 
 	// om te checken
-	getIo()->visualizeGraph(getGraph());
+	
 
-	if (getGraph()->graphColouring() == true)
+	for (int i = 0; i < getGraph()->getNumberOfVertices(); i++)
 	{
-		getIo()->printSolution(getGraph());
+		getIo()->visualizeGraph(getGraph());
+		getGraph()->rotateGraph();
+
+		if (getGraph()->graphColouring() == true)
+		{
+			getIo()->printSolution(getGraph());
+		}
 	}
+
+	getIo()->visualizeGraph(getGraph());
 }
 
 
