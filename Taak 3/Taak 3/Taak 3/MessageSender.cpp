@@ -25,14 +25,17 @@ void MessageSender::start()
 	getGraph()->makeGraph(getParser()->readMessages("Messages.txt"), getParser()->readCompatibilities("Messages.txt"));
 
 	// om te checken
-	getGraph()->visualizeGraph();
+	getIo()->visualizeGraph(getGraph());
 
 	getGraph()->changeGraphToComplement();
 
 	// om te checken
-	getGraph()->visualizeGraph();
+	getIo()->visualizeGraph(getGraph());
 
-	getGraph()->graphColouring();
+	if (getGraph()->graphColouring() == true)
+	{
+		getIo()->printSolution(getGraph());
+	}
 }
 
 

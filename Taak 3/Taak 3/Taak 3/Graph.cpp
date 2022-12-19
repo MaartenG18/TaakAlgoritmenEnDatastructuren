@@ -1,6 +1,7 @@
 #include "Graph.h"
 #include <unordered_map>
 #include <iostream>
+#include "Io.h"
 
 // ----- Constructors -----
 
@@ -80,11 +81,11 @@ void Graph::changeGraphToComplement()
 	}
 }
 
-bool Graph::graphColouringIsSafe(int v, std::shared_ptr<std::vector<std::vector<int>>> graph, std::shared_ptr<std::vector<int>> colours, int c, int numberOfVertices)  // [1]
+bool Graph::graphColouringIsSafe(int v, int c)  // [1]
 {
-	for (int i = 0; i < numberOfVertices; i++)
+	for (int i = 0; i < getNumberOfVertices(); i++)
 	{
-		if (graph->at(v)[i] && c == colours->at(i))
+		if (getAdjacencyMatrix()->at(v)[i] && c == getColours()->at(i))
 		{
 			return false;
 		}
@@ -92,31 +93,31 @@ bool Graph::graphColouringIsSafe(int v, std::shared_ptr<std::vector<std::vector<
 	return true;
 }
 
-bool Graph::graphColoringUtil(std::shared_ptr<std::vector<std::vector<int>>> graph, int numberOfVertices, std::shared_ptr<std::vector<int>> colours, int v)  // [1]
+bool Graph::graphColoringUtil(int v)  // [1]
 {
-	if (v == numberOfVertices)
+	if (v == getNumberOfVertices())
 	{
 		return true;
 	}
 
-	for (int c = 1; c <= numberOfVertices; c++)
+	for (int c = 1; c <= getNumberOfVertices(); c++)
 	{
-		if (graphColouringIsSafe(v, graph, colours, c, numberOfVertices))
+		if (graphColouringIsSafe(v, c))
 		{
-			colours->at(v) = c;
+			getColours()->at(v) = c;
 
-			if (graphColoringUtil(graph, numberOfVertices, colours, v + 1) == true)
+			if (graphColoringUtil(v + 1) == true)
 			{
 				return true;
 			}
 
-			colours->at(v) = 0;
+			getColours()->at(v) = 0;
 		}
 	}
 	return false;
 }
 
-void Graph::graphColouring() // [1]
+bool Graph::graphColouring() // [1]
 {
 	auto colours = std::make_shared<std::vector<int>>(getNumberOfVertices());
 	setColours(colours);
@@ -126,63 +127,13 @@ void Graph::graphColouring() // [1]
 		getColours()->at(i) = 0;
 	}
 
-	if (graphColoringUtil(getAdjacencyMatrix(), getNumberOfVertices(), getColours(), 0) == true)
+	if (graphColoringUtil(0) == true)
 	{
 		//doorgeven van de array met kleuren en op de juiste manier verwerken, dit is maar om te testen
-		printSolution(getColours());
+		return true;
 	}
-}
 
-// om te testen:
-void Graph::printSolution(std::shared_ptr<std::vector<int>> colours)
-{
-	std::vector<std::vector<std::string>> oplossing;
-	for (int i = 0; i < colours->size(); i++) {
-		if (oplossing.size() < colours->at(i)) {
-			std::vector<std::string> nieuweKleur;
-			nieuweKleur.push_back(getVertices()->at(i)->getMessage());
-			oplossing.push_back(nieuweKleur);
-		}
-		else {
-			oplossing[colours->at(i)-1].push_back(getVertices()->at(i)->getMessage());
-		}
-	}
-	std::cout << "oplossing:" << std::endl;
-	for (int i = 0; i < getNumberOfVertices(); i++) {
-		std::cout << getVertices()->at(i)->getMessage() << " ";
-	}
-	std::cout << std::endl;
-	for (int i = 0; i < getNumberOfVertices(); i++){
-		std::cout << "   " << colours->at(i) << "   ";
-	}
-	std::cout << std::endl;
-	std::cout << std::endl;
-	std::cout << "de data zal dus worden verstuurd in " << oplossing.size() << " groepen, deze zijn: " << std::endl;
-	for (int i = 0; i < oplossing.size(); i++) {
-		std::cout << "groep " << i + 1 << ": ";
-		for (int j = 0; j < oplossing[i].size(); j++) {
-			std::cout << oplossing[i][j];
-			if (j != oplossing[i].size()-1) {
-				std::cout << ", ";
-			}
-		}
-		std::cout << std::endl;
-	}
-	std::cout << "\n";
-}
-
-void Graph::visualizeGraph()
-{
-	for (int i = 0; i < getAdjacencyMatrix()->size(); i++) {
-		std::cout << " ---------------------------------" << std::endl;
-		for (int j = 0; j < getAdjacencyMatrix()->size(); j++) {
-			std::cout << " | ";
-			std::cout << getAdjacencyMatrix()->at(i)[j];
-			
-		}
-		std::cout << " |" << std::endl;
-	}
-	std::cout << " ---------------------------------" << std::endl;
+	return false;
 }
 
 
