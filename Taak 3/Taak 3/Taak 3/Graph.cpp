@@ -1,7 +1,12 @@
+// Maarten Gielkens
+// Simon Knuts
+// Yara Mijnendonckx
+
 #include "Graph.h"
 #include <unordered_map>
 #include <iostream>
 #include "Io.h"
+
 
 // ----- Constructors -----
 
@@ -36,7 +41,6 @@ void Graph::removeEdge(int i, int j)
 
 void Graph::makeGraph(std::shared_ptr<std::vector<std::string>> vertices, std::shared_ptr<std::vector<std::pair<std::string, std::string>>> edges)
 {
-	// van 'indexMap' misschien een membervariabele maken om makkelijker de output van graph colouring te kunnen verwerken
 	std::unordered_map<std::string, int> indexMap;
 	setNumberOfVertices(static_cast<int>(vertices->size()));
 	
@@ -81,11 +85,11 @@ void Graph::changeGraphToComplement()
 	}
 }
 
-bool Graph::graphColouringIsSafe(int v, int c)  // [1]
+bool Graph::graphColouringIsSafe(int vertex, int colour)  // [1]
 {
 	for (int i = 0; i < getNumberOfVertices(); i++)
 	{
-		if (getAdjacencyMatrix()->at(v)[i] && c == getColours()->at(i))
+		if (getAdjacencyMatrix()->at(vertex)[i] && colour == getColours()->at(i))
 		{
 			return false;
 		}
@@ -93,25 +97,25 @@ bool Graph::graphColouringIsSafe(int v, int c)  // [1]
 	return true;
 }
 
-bool Graph::graphColoringUtil(int v)  // [1]
+bool Graph::graphColoringUtil(int vertex)  // [1]
 {
-	if (v == getNumberOfVertices())
+	if (vertex == getNumberOfVertices())
 	{
 		return true;
 	}
 
-	for (int c = 1; c <= getNumberOfVertices(); c++)
+	for (int colour = 1; colour <= getNumberOfVertices(); colour++)
 	{
-		if (graphColouringIsSafe(v, c))
+		if (graphColouringIsSafe(vertex, colour))
 		{
-			getColours()->at(v) = c;
+			getColours()->at(vertex) = colour;
 
-			if (graphColoringUtil(v + 1) == true)
+			if (graphColoringUtil(vertex + 1) == true)
 			{
 				return true;
 			}
 
-			getColours()->at(v) = 0;
+			getColours()->at(vertex) = 0;
 		}
 	}
 	return false;
@@ -129,7 +133,6 @@ bool Graph::graphColouring() // [1]
 
 	if (graphColoringUtil(0) == true)
 	{
-		//doorgeven van de array met kleuren en op de juiste manier verwerken, dit is maar om te testen
 		return true;
 	}
 

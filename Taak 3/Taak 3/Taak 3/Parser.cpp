@@ -1,3 +1,7 @@
+// Maarten Gielkens
+// Simon Knuts
+// Yara Mijnendonckx
+
 #include "Parser.h"
 #include <string>
 #include <sstream>

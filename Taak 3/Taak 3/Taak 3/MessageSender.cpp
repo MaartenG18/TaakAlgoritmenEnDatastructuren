@@ -1,3 +1,7 @@
+// Maarten Gielkens
+// Simon Knuts
+// Yara Mijnendonckx
+
 #include "MessageSender.h"
 
 
@@ -21,23 +25,15 @@ void MessageSender::start()
 
 	getGraph()->makeGraph(getParser()->readMessages("Messages.txt"), getParser()->readCompatibilities("Messages.txt"));
 
-	// om te checken
-	getIo()->visualizeGraph(getGraph());
-
 	getGraph()->changeGraphToComplement();
 
-	// om te checken
 	if (getGraph()->graphColouring() == true)
 	{
 		getIo()->printSolution(getGraph());
 	}
-	getIo()->visualizeGraph(getGraph());
-
 
 	for (int i = 0; i < getGraph()->getNumberOfVertices()-1; i++)
 	{
-		getIo()->visualizeGraph(getGraph());
-
 		if (getGraph()->graphColouring() == true)
 		{
 			getIo()->printSolution(getGraph());
@@ -45,8 +41,6 @@ void MessageSender::start()
 		getGraph()->rotateGraph();
 
 	}
-
-	getIo()->visualizeGraph(getGraph());
 }
 
 

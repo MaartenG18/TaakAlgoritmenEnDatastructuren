@@ -1,3 +1,7 @@
+// Maarten Gielkens
+// Simon Knuts
+// Yara Mijnendonckx
+
 #include "Io.h"
 #include <iostream>
 #include <memory>
@@ -29,37 +33,52 @@ void Io::visualizeGraph(std::shared_ptr<Graph> graph)
 
 void Io::printSolution(std::shared_ptr<Graph> graph)
 {
-	std::vector<std::vector<std::string>> oplossing;
-	for (int i = 0; i < graph->getColours()->size(); i++) {
-		if (oplossing.size() < graph->getColours()->at(i)) {
-			std::vector<std::string> nieuweKleur;
-			nieuweKleur.push_back(graph->getVertices()->at(i)->getMessage());
-			oplossing.push_back(nieuweKleur);
+	std::vector<std::vector<std::string>> solution;
+
+	for (int i = 0; i < graph->getColours()->size(); i++)
+	{
+		if (solution.size() < graph->getColours()->at(i))
+		{
+			std::vector<std::string> newColour;
+			newColour.push_back(graph->getVertices()->at(i)->getMessage());
+			solution.push_back(newColour);
 		}
-		else {
-			oplossing[graph->getColours()->at(i) - 1].push_back(graph->getVertices()->at(i)->getMessage());
+		else
+		{
+			solution[graph->getColours()->at(i) - 1].push_back(graph->getVertices()->at(i)->getMessage());
 		}
 	}
-	std::cout << "oplossing:" << std::endl;
-	for (int i = 0; i < graph->getNumberOfVertices(); i++) {
+
+	std::cout << "Oplossing:" << std::endl;
+
+	for (int i = 0; i < graph->getNumberOfVertices(); i++)
+	{
 		std::cout << graph->getVertices()->at(i)->getMessage() << " ";
 	}
+
 	std::cout << std::endl;
-	for (int i = 0; i < graph->getNumberOfVertices(); i++) {
+
+	for (int i = 0; i < graph->getNumberOfVertices(); i++)
+	{
 		std::cout << "   " << graph->getColours()->at(i) << "   ";
 	}
+
 	std::cout << std::endl;
 	std::cout << std::endl;
-	std::cout << "de data zal dus worden verstuurd in " << oplossing.size() << " groepen, deze zijn: " << std::endl;
-	for (int i = 0; i < oplossing.size(); i++) {
-		std::cout << "groep " << i + 1 << ": ";
-		for (int j = 0; j < oplossing[i].size(); j++) {
-			std::cout << oplossing[i][j];
-			if (j != oplossing[i].size() - 1) {
+	std::cout << "De data zal dus worden verstuurd in " << solution.size() << " groepen, deze zijn: " << std::endl;
+
+	for (int i = 0; i < solution.size(); i++)
+	{
+		std::cout << "Groep " << i + 1 << ": ";
+		for (int j = 0; j < solution[i].size(); j++)
+		{
+			std::cout << solution[i][j];
+			if (j != solution[i].size() - 1)
+			{
 				std::cout << ", ";
 			}
 		}
 		std::cout << std::endl;
 	}
-	std::cout << "\n";
+	std::cout << std::endl;
 }

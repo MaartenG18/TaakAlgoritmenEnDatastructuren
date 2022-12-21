@@ -1,3 +1,7 @@
+// Maarten Gielkens
+// Simon Knuts
+// Yara Mijnendonckx
+
 #pragma once
 
 #include <fstream>
@@ -6,7 +10,7 @@
 class Parser
 {
 public:
-	Parser();
+	Parser(); // Constructor
 
 	std::shared_ptr<std::vector<std::string>> readMessages(std::string fileName); // Method to read all the messages
 	std::shared_ptr<std::vector<std::pair<std::string, std::string>>> readCompatibilities(std::string fileName); // Method to read all the compatible messages
