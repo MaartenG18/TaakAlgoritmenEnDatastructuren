@@ -141,13 +141,19 @@ void Graph::rotateGraph()
 	std::vector<int> row1{};
 	std::vector<int> column1{};
 
-	for (int j = getAdjacencyMatrix()->size() - 1; j >= 0; j--) {
+	for (int j = 0; j < getAdjacencyMatrix()->size(); j++) {
 		row1.push_back(getAdjacencyMatrix()->at(0)[j]);
 	}
 
-	for (int i = getAdjacencyMatrix()->size() - 1; i >= 0 ; i--) {
+	auto rowit = row1.begin();
+	std::rotate(rowit, rowit + 1, row1.end());
+
+	for (int i = 0; i < getAdjacencyMatrix()->size(); i++) {
 		column1.push_back(getAdjacencyMatrix()->at(i)[0]);
 	}
+
+	auto columnit = column1.begin();
+	std::rotate(columnit, columnit + 1, column1.end());
 
 	for (int i = 1; i < getAdjacencyMatrix()->size(); i++) {
 		for (int j = 1; j < getAdjacencyMatrix()->size(); j++) {

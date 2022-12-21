@@ -32,12 +32,13 @@ void MessageSender::start()
 	for (int i = 0; i < getGraph()->getNumberOfVertices(); i++)
 	{
 		getIo()->visualizeGraph(getGraph());
-		getGraph()->rotateGraph();
 
 		if (getGraph()->graphColouring() == true)
 		{
 			getIo()->printSolution(getGraph());
 		}
+		getGraph()->rotateGraph();
+
 	}
 
 	getIo()->visualizeGraph(getGraph());
