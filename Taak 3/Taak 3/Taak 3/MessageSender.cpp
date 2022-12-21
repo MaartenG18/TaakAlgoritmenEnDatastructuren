@@ -27,9 +27,14 @@ void MessageSender::start()
 	getGraph()->changeGraphToComplement();
 
 	// om te checken
-	
+	if (getGraph()->graphColouring() == true)
+	{
+		getIo()->printSolution(getGraph());
+	}
+	getIo()->visualizeGraph(getGraph());
 
-	for (int i = 0; i < getGraph()->getNumberOfVertices(); i++)
+
+	for (int i = 0; i < getGraph()->getNumberOfVertices()-1; i++)
 	{
 		getIo()->visualizeGraph(getGraph());
 		getGraph()->rotateGraph();
