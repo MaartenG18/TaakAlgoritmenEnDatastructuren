@@ -163,6 +163,18 @@ void Graph::rotateGraph()
 		getAdjacencyMatrix()->at(i)[getAdjacencyMatrix()->size() - 1] = column1[i];
 	}
 
+	for (int i = 0; i < getVertices()->size(); i++) {
+		std::cout << getVertices()->at(i)->getMessage() + " ";
+	}
+	std::cout << std::endl;
+	auto it = getVertices()->begin();
+	std::rotate(it, it + 1, getVertices()->end());
+	for (int i = 0; i < getVertices()->size(); i++) {
+		std::cout << getVertices()->at(i)->getMessage() + " ";
+	}
+	std::cout << std::endl;
+
+
 
 }
 
