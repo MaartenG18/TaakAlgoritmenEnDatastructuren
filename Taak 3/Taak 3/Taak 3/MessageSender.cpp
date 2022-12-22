@@ -30,6 +30,7 @@ void MessageSender::start()
 	if (getGraph()->graphColouring() == true)
 	{
 		getIo()->printSolution(getGraph());
+		getGraph()->rotateGraph();
 	}
 
 	for (int i = 0; i < getGraph()->getNumberOfVertices()-1; i++)
